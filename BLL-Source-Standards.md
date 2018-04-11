@@ -29,6 +29,8 @@ Master should be reflect the production version of the code which is currently r
 #### 3.1.b. **Sandbox** 
 Sandbox is a development branch where all new features and bug fixes are developed within and QA’ed. 
 
+While a project is pre-production, meaning prior to a first public release it is ok for there to be only 1 branch and for everything to be checked into master. However, upon the first production release we should immediately move to a master/sandbox split.
+
 #### 3.1.c. **Additional branches** 
 Additional branches for sub-sprints or releases off of Sandbox can be used at the Dev/PMs discretion. For instance if we are working on features for two different sprints simultaneously (ie. D5 Sprint 1 and D5 Sprint 2), then we should create two branches from Sandbox with the names “D5_Sprint_1” and “D5_Sprint_2”). 
 

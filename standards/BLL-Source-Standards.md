@@ -1,5 +1,5 @@
 # Blue Label Labs - Source Code Repository Standards
-- Author: Bobby Gill, Dulio Denis
+- Author: [Bobby Gill](https://www.bluelabellabs.com/team/bobby-gill/), [Dulio Denis](https://www.bluelabellabs.com/team/dulio-denis/)
 - Version: 1.0
 ---
 

@@ -19,7 +19,7 @@ Commits should be done regularly through development. Commits should be done to 
 Clear, legible commit messages must be added to every commit done. If fixing a bug or JIRA/Trello issue, reference the Bug ID and the title of the bug being fixed in the commit message. For Trello issues please include a direct link to the Trello issues resolved in this commit.
 
 ## 3.0. **Branches**
-![](images/branch-example.png?raw=true)
+![](../images/branch-example.png?raw=true)
 
 ### 3.1 All repositories must have at least 2 branches:
 

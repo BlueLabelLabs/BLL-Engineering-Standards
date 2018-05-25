@@ -1,6 +1,6 @@
 # Blue Label Labs - Mobile Standards
-- Author: Bobby Gill, Dulio Denis
-- Version: 1.1
+- Author: [Bobby Gill](https://www.bluelabellabs.com/team/bobby-gill/), [Dulio Denis](https://www.bluelabellabs.com/team/dulio-denis/)
+- Version: 1.0
 ---
 
 ### 1. Localization Strings

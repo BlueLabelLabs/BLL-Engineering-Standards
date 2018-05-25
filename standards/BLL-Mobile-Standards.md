@@ -1,6 +1,6 @@
 # Blue Label Labs - Mobile Standards
 - Author: Bobby Gill, Dulio Denis
-- Version: 1.0
+- Version: 1.1
 ---
 
 ### 1. Localization Strings
@@ -27,7 +27,7 @@ Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps
 - CocoaPods should be checked into the Git source tree.
 
 ### 5. Passwords & Security
-Passwords and any other secure login information must be stored in the iOS Keychain or Android Keystore
+Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore
 
 - If the Android device does not have a passcode/pin enabled, then encrypt the password data and store into the preferences. Only do this if the passcode/pin isn’t setup and thus Android keystore isn’t available.
 

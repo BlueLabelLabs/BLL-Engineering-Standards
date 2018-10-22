@@ -3,7 +3,10 @@
 - Version: 1.0
 ---
 
-## Date & Time Standards
+### 1. Represent as UTC
+All date/times should be represented and stored in UTC format in all backend databases. In general, all APIs should be returning date/times in UTC and only accepting dates represented in UTC.
 
-### 1. All date/times should be represented and stored in UTC format in all backend databases. In general, all APIs should be returning date/times in UTC and only accepting dates represented in UTC.
-- If a date/time needs to be presented to the user in a local time zone, then the time zone offset should be stored alongside the UTC date/time stamp in the database.
+### 2. Present as Local
+If a date/time needs to be presented to the user in a local time zone, then the time zone offset should be stored alongside the UTC date/time stamp in the database.
+
+

@@ -27,12 +27,12 @@
 }
 
 
-###3. Create a new AWS IAM User to be used by any app/web site to write/create/delete/browse an S3 bucket
+### 3. Create a new AWS IAM User to be used by any app/web site to write/create/delete/browse an S3 bucket
 - DO NOT USE THE ROOT IAM USER's TOKEN!
 - Create a new IAM User in the AWS Management console, disable the password and make it a member of the AmazonS3FullAccess role. 
 - Embed the token/token secret for the above created account into the app for use in accessing S3 resources.
 
-###4. AWS tokens MUST NOT be stored in the source code of the front-end app
+### 4. AWS tokens MUST NOT be stored in the source code of the front-end app
 - Retrieve the tokens to be using on the client side through an authenticated call made to the backend web service. The source code should never have hard coded AWS token or token secrets contained within.
 
 ## Access Control to AWS Resources

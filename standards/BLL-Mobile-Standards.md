@@ -28,8 +28,14 @@ Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps
 
 ### 5. Passwords & Security
 Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore
-
+- Access tokens received from web services must also be stored in the keychain and not in UserDefaults.
 - If the Android device does not have a passcode/pin enabled, then encrypt the password data and store into the preferences. Only do this if the passcode/pin isn’t setup and thus Android keystore isn’t available.
 
 Android code should be protected with proguard.
 - Ensure code obfuscation is turned on.
+
+### 6. Handling User Sessions
+- When a user logs in to a web service and receives a OAuth access token, this access token **must** be stored within the platform keychain and not in UserDefaults.
+- Unless otherwise specified by the client, OAuth access tokens should be set with an expiry time of at least 1 month.
+- Whenever a token is expired or is no longer accepted by the web service, the mobile app **must** invalidate the token from the keychain and present the user with the login screen.
+- When a user chooses to logout of an app, this should be done by invalidating and deleting the locally stored access token and then optionally a call to the web service to invalidate any push device tokens. In the case where the call to invalidate push token on the web service fails due to an invalid token, the app **must not** display any authentication error to the user.  

@@ -25,3 +25,11 @@ Web portals should also have version numbers that are properly incremented and k
 All images or user uploaded static content **must** be stored on Amazon S3 (or equivalent). Do not store images on the application server.
 - Bucket policy must be configured so that we **disable** direct browsing on the bucket.
 - Unless specifically requested by the client, it is ok to allow individual S3 files to be accessible by anyone.
+
+### 7. Password Hashing and Salting
+- There should be no need to store passwords in the database if you are using ASP.NET OWIN's infrastructure, which you should be, it handles the password storage on its own. However, if you must store passwords on the server:
+- Passwords saved into the database **must** be salted using a random string generated using the System.Security.Cryptography.RNGCryptoServiceProvider (http://msdn.microsoft.com/en-us/library/system.security.cryptography.rngcryptoserviceprovider.aspx) . The salt should be pre-pended to the password before it is hashed. 
+- There **must** be a unique salt for each password in the database. Salts **must** not be reused, ever.
+- DO NOT use MD5 to compute a password hash, it is not secure. All passwords must be hashed with either bcrypt (https://github.com/BcryptNet/bcrypt.net) or PBKDF2 algorithms.
+
+

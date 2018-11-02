@@ -9,8 +9,10 @@ Always add references via Nuget, **do not** add DLLs directly as references to t
 ### 2. OAuth
 Authentication should be done using OAuth bearer tokens using ASP.NET's OWIN infrastructure. For both web services and MVC portals.
 
-### 3. Error Logging
+### 3. Error Logging & Tracing
 Web portals should all have Elmah error logging integration enabled.
+
+All tracing within code **must** be done using the System.Diagnostics trace facility. **DO NOT** under any circumstance manually open filestreams and output your log statements to that. 
 
 ### 4. API Versioning
 API’s should be versioned and have optional ability to force upgrades on clients

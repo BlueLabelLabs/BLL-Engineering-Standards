@@ -34,4 +34,9 @@ All images or user uploaded static content **must** be stored on Amazon S3 (or e
 - There **must** be a unique salt for each password in the database. Salts **must** not be reused, ever.
 - DO NOT use MD5 to compute a password hash, it is not secure. All passwords must be hashed with either bcrypt (https://github.com/BcryptNet/bcrypt.net) or PBKDF2 algorithms.
 
+### 8. Designing Secure Web Service Operations
+- Do not pass in the UserID of the user making the request to the web service method, the web service should use the authentication token and extract the UserID from the token, it should never be accepting the UserID as a parameter to the method.
+- Always verify that the UserID has the appropriate permission to perform operations on the target objects of a web service request. For example, in a social networking app, a User should not be able to delete a post that was created by another user. The web service method **must** check that the UserID extracted from the authentication token has the permission to perform the requested operation.
+- In methods that return user profile information, if the UserID contained within the authentication token passed **does not** match the UserID of the User information being returned, the web service **must not** return any personal or sensitive information from that User. Fields such as Email, Phone Number, Date of Birth, Address and App preferences **must not** be returned to a caller that is not that user.
+
 

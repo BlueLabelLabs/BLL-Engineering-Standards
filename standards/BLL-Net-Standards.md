@@ -39,4 +39,9 @@ All images or user uploaded static content **must** be stored on Amazon S3 (or e
 - Always verify that the UserID has the appropriate permission to perform operations on the target objects of a web service request. For example, in a social networking app, a User should not be able to delete a post that was created by another user. The web service method **must** check that the UserID extracted from the authentication token has the permission to perform the requested operation.
 - In methods that return user profile information, if the UserID contained within the authentication token passed **does not** match the UserID of the User information being returned, the web service **must not** return any personal or sensitive information from that User. Fields such as Email, Phone Number, Date of Birth, Address and App preferences **must not** be returned to a caller that is not that user.
 
+### 9. Validation of Email/SMS OTP Codes
+- When implementing phone number verification or email verification through the use of OTP codes sent through email/sms, the OTP validation **must** be done on the server and not within the front end app code. That is when a user enters the OTP code, the app *must* call the server to perform the verification check and the server will inform the app if the code is a match. The OTP code *must not* be returned back to the app client or exposed in anywhich way through the web service.
+
+### 10. Change password functionality
+- When implementing change password, the verification that the old password matches the password entered by the user **must** be done on the server side. The app should not be storing or comparing the old password to the password entered by the user at all, this **must** be done on the server side.
 

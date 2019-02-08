@@ -10,7 +10,7 @@ All copy in alert messages/UI should be localizable. Do not hard code any string
 Provide the strings file to the PM so they can proof the strings.
 
 ### 2. Crash Reporting
-Fabric Crashlytics should be integrated into every build.
+Firebase Crashlytics should be integrated into every build.
 - dSyms provided for every new TestFlight build and uploaded to Firebase.
 
 - Use API Key: b53fcf08df9b183b382153735d57a10862fc5348

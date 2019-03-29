@@ -11,7 +11,6 @@
 - All S3 buckets must only allow create/edit/browse/delete permissions to an AWS IAM user account that will be used by the app. Buckets MUST not be accessible for create/edit/browse/delete to unauthenticated users.
 - It is generally ok, unless requested by the client or PM team, to allow bucket items to be read without a IAM user account.
 - Use the following bucket policy for all S3 buckets, this will enable public read while restricting write/edit/create/delete to a specific IAM user account. (Public Read Private Write)
-- Note: Add "DeleteObject" only when Application demands Delete permission IAM User.
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -40,6 +39,7 @@
         }
     ]
 }
+- Note: Add "DeleteObject" Action only when Application demands Delete permission for IAM User.
 
 
 ### 3. Create a new AWS IAM User to be used by any app/web site to write/create/delete/browse an S3 bucket

@@ -10,18 +10,33 @@
 ### 2. All S3 Buckets must be locked down with the appropriate bucket permissions
 - All S3 buckets must only allow create/edit/browse/delete permissions to an AWS IAM user account that will be used by the app. Buckets MUST not be accessible for create/edit/browse/delete to unauthenticated users.
 - It is generally ok, unless requested by the client or PM team, to allow bucket items to be read without a IAM user account.
-- Use the following bucket policy for all S3 buckets, this will enable public read while restricting write/edit/create/delete to an IAM user account.
+- Use the following bucket policy for all S3 buckets, this will enable public read while restricting write/edit/create/delete to a specific IAM user account. (Public Read Private Write)
+- Note: Add "DeleteObject" only when Application demands Delete permission IAM User.
 {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllowPublicRead",
+            "Effect": "Deny",
+            "NotPrincipal": {
+                "AWS": "arn:aws:iam::905588271239:user/AWS_S3_User"
+            },
+            "NotAction": "s3:GetObject",
+            "Resource": "arn:aws:s3:::S3_Folder/*"
+        },
+        {
+            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "*"
+                "AWS": "arn:aws:iam::905588271239:user/AWS_S3_User"
             },
-            "Action": "s3:GetObject",
-            "Resource": "<URN to S3 bucket>"
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObjectAcl",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::S3_Folder/*"
         }
     ]
 }
@@ -29,7 +44,8 @@
 
 ### 3. Create a new AWS IAM User to be used by any app/web site to write/create/delete/browse an S3 bucket
 - DO NOT USE THE ROOT IAM USER's TOKEN!
-- Create a new IAM User in the AWS Management console, disable the password and make it a member of the AmazonS3FullAccess role. 
+- Create a new IAM User in the AWS Management console, disable the password.
+- Make sure any policies or roles are not associated to new IAM User.
 - Embed the token/token secret for the above created account into the app for use in accessing S3 resources.
 
 ### 4. AWS tokens MUST NOT be stored in the source code of the front-end app

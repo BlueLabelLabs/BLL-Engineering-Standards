@@ -12,10 +12,10 @@ All source code must live in a Git repository
 
 #### 1.1a. **All files must have properly spelled names in TitleCase**
 All source code files must be spelled properly with proper grammar and must be TitleCased.
-    * "Contants.swift" - WRONG, it should be "Constants.swift"
-    * "LoginViewcontroller.swift" - WRONG, it should be "LoginViewController.swift"
-    * "Utill.swift" - WRONG, it should be "Util.swift"
-    * "appDefaultsManager.swift" - WRONG, it should be "AppDefaultsManager.swift"
+* "Contants.swift" - WRONG, it should be "Constants.swift"
+* "LoginViewcontroller.swift" - WRONG, it should be "LoginViewController.swift"
+* "Utill.swift" - WRONG, it should be "Util.swift"
+* "appDefaultsManager.swift" - WRONG, it should be "AppDefaultsManager.swift"
 
 This includes ALL files, not just source code files but XCode project files, workspace files or .NET solution/project files.
 

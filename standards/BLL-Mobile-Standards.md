@@ -24,7 +24,8 @@ Firebase Crashlytics should be integrated into every build.
 ### 4. CocoaPods
 Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps.
 
-- CocoaPods should be checked into the Git source tree.
+- CocoaPods MUST be checked into the Git source tree.
+- Podfiles MUST specify the specific version of the cocoapod that the code was built using.
 
 ### 5. Passwords & Security
 Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore

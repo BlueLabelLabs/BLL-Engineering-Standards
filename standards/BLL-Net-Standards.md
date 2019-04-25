@@ -45,3 +45,9 @@ All images or user uploaded static content **must** be stored on Amazon S3 (or e
 ### 10. Change password functionality
 - When implementing change password, the verification that the old password matches the password entered by the user **must** be done on the server side. The app should not be storing or comparing the old password to the password entered by the user at all, this **must** be done on the server side.
 
+### 11. Guarding against SQL Injection
+- In general, we should avoid using dynamically created SQL statements within our code. We should be using stored procedures or the LINQ object model when possible. However, if using dynamic SQL all parameters to that SQL statement **must** be properly sanitized (using the SqlParameter class for ADO.NET or its equivalent in EntityFramework).
+- SQL stored procedures **must never** concatenate user input parameters to a SQL query, simply use a paramerterized query.
+--*never do* SELECT * FROM USER WHERE ID='@userID'.
+--Instead write it SELECT * FROM USER WHERE ID=@userID
+

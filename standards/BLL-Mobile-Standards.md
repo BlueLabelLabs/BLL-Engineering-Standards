@@ -26,6 +26,7 @@ Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps
 
 - CocoaPods MUST be checked into the Git source tree.
 - Podfiles MUST specify the specific version of the cocoapod that the code was built using.
+- The version of a Podfile used in an app MUST BE updated automatically by the development team if that version of the plugin is deprecated or moved out of support by the 3rd party. (ie. Google Places SDK stopped supporting Version 2.7, we need to make sure across all apps we update our Google Places plugins to the *oldest supported* version)
 
 ### 5. Passwords & Security
 Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore

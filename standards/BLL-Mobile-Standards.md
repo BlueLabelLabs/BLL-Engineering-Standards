@@ -12,8 +12,8 @@ Provide the strings file to the PM so they can proof the strings.
 ### 2. Crash Reporting
 Firebase Crashlytics should be integrated into every build.
 - dSyms provided for every new TestFlight build and uploaded to Firebase.
-
-- Use API Key: b53fcf08df9b183b382153735d57a10862fc5348
+- All production apps should use Crashlytics key provided by the client.
+- Ensure all PMs, Engineering Leads and developers have access to the Crashlytics account.
 
 ### 3. App Identifiers
 - Every project will need one sandbox and one production identifier.
@@ -40,3 +40,10 @@ Android code should be protected with proguard.
 - Unless otherwise specified by the client, OAuth access tokens should be set with an expiry time of at least 1 month.
 - Whenever a token is expired or is no longer accepted by the web service, the mobile app **must** invalidate the token from the keychain and present the user with the login screen.
 - When a user chooses to logout of an app, this should be done by invalidating and deleting the locally stored access token and then optionally a call to the web service to invalidate any push device tokens. In the case where the call to invalidate push token on the web service fails due to an invalid token, the app **must not** display any authentication error to the user.  
+
+### 7. 3rd Party API Keys
+API tokens for 3rd party services that are embedded into the source code (Google Places, Crashlytics, etc.) must follow the following guidelines:
+- Production apps MUST USE client provided API keys. No app should be released into production using a API KEY created by the development team.
+- Verify all Google API keys used are associated with an account that has billing information provided.
+- API Keys that grant access to permission to AWS, Azure or other sensitive 3rd party platforms MUST BE downloaded from the server upon app launch and MUST NOT be embedded in the source code.
+

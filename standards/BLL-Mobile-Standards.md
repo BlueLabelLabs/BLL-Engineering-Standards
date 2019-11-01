@@ -13,7 +13,7 @@ Provide the strings file to the PM so they can proof the strings.
 Firebase Crashlytics should be integrated into every build.
 - dSyms provided for every new TestFlight build and uploaded to Firebase.
 - All production apps should use Crashlytics and the Firebase configuration files provided by the client.
-- Ensure all PMs, Engineering Leads and developers have access to the Crashlytics account.
+- Ensure all PMs, Engineering Leads, QA and developers have access to the Crashlytics account.
 
 ### 3. App Identifiers
 - Every project will need one sandbox and one production identifier.

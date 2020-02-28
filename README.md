@@ -9,6 +9,6 @@ These are the collected standards for the BLL Engineering team.
 | 4. | [Versioning & Build Numbers Standards](standards/BLL-Versioning-Builds.md)
 | 5. | [AWS Standards](standards/BLL-AWS-Standards.md)
 | 6. | [Date & Time Standards](standards/BLL-DateTime-Standards.md)
-
+| 7. | [Wordpress Standards](standards/BLL-Wordpress-Standards.md)
 ### For More
 Visit [https://www.bluelabellabs.com/](https://www.bluelabellabs.com/) to see more.

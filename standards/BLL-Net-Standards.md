@@ -51,3 +51,17 @@ All images or user uploaded static content **must** be stored on Amazon S3 (or e
      -*WRONG*: SELECT * FROM USER WHERE ID='@userID'.
      -*RIGHT*: write it SELECT * FROM USER WHERE ID=@userID
 
+
+### 12. HTTP Response Codes and API Error Responses
+- All API must return proper HTTP response codes for success and error conditions. If the processing of a request results in an error, the API **must not** return an HTTP 200. 
+- The following HTTP response codes should be utilized in general:
+    - 200: Returned whenever a the API operation completed successfully.
+    - 401: Returned whenever an API operation failed due to a missing or invalid authentication token. Upon receiving a 401, the app front-end **should** redirect to a login screen.
+    - 500: All other errors during processing **must** return an HTTP 500 error.
+
+#### 12.1 HTTP 500 Error Response Structure
+- When a HTTP 500 error is returned it **should** contain a JSON error message structure containing the following fields of data:
+    - Error Code: an integer uniquely representing this error condition.
+    - Title: a string describing in brief what the error is. (optional)
+    - Description: a full-text description of what the error is.(optional)
+- The front end of the app **should** display only the Error Code to the user and **should** use the Error Code to locate a localized string description to display to the user.

@@ -11,3 +11,7 @@ Dev teams should never be uploading a build to TestFlight or Google Play where t
 - The Unit Test document should list in a table all of the tests the developer has ran on this build and their outcome. NOTE: The developer must provide meaningful test descriptions for the tests that were ran and the outcomes of those tests. Messages like "Outcome matched conversation on Skype" are not acceptable. A reader should be able to read these documents and surmise what the unit test was and what the outcomes was without outside information.
 - All Unit Test and Release Notes should be uploaded to Google Drive or done as a Google Document and Google Sheet. The PM will setup a Google Drive for each project.
 
+### 3. Automated Builds/Continuous Deployment
+- All Android and iOS projects **must** be integrated into a Continuous Deployment tool for creating and distributing builds automatically. Please consult with BLL Engineering to get instructions on which tool and how to integrate.
+- All backend projects (Node/.NET Core/etc) **must** be integrated into a Continuous Deployment tool for pushing new releases to sandbox and production environments. Please consult with BLL Engineering to get instructions on which tool and how to integrate.
+

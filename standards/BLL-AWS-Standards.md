@@ -53,7 +53,7 @@
 
 ## Access Control to AWS Resources
 
-### 1. All production EC2 and RDS machines when deployed MUST be IP-restricted on all NON HTTP/HTTPS protocols
+### 1. All production & sandbox EC2 and RDS machines when deployed MUST be IP-restricted on all NON HTTP/HTTPS protocols
 - Create 1 Security Group named "SG-EC2-PROD" and use this to secure all production EC2 instances. This SG must only allow non-HTTP/HTTPS protocol access to:
     - Bobby's Public IP address
     - Public IP address of the dev team
@@ -63,3 +63,11 @@
     - Bobby's Public IP address
     - Public IP address of the dev team
     - The "SG-EC2-PROD" SG used by the EC2 resources that will be access this database
+
+- Similar to the above, we should create 2 SGs for Sandbox which is also IP restricted.
+
+## DNS / Route53 Setup
+
+### 1. All client DNS records should be managed on AWS Route53 DNS system, especially if we are hosting a website under their root domain.
+- Route53 **must** be used if plan to route traffic to a root domain through a load balancer using HTTPS. (ie. if we wanted to host the website for https://bluelabellabs.com on AWS behind a load balancer)
+- DNS records must be migrated from the DNS nameserver to Route53 using the export/import functionality on both the source domain host and Amazon Route53.

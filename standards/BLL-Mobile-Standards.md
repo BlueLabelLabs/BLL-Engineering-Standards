@@ -24,9 +24,10 @@ Firebase Crashlytics should be integrated into every build.
 ### 4. CocoaPods
 Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps.
 
+- CocoaPods **must** be properly integrated into an XCode project, ie. copying the source code from a CocoaPod and pasting it into the app is **never** to be done. They **must** be properly referenced via Podfile and integrated via the "pod install" mechanism.
 - CocoaPods MUST be checked into the Git source tree.
 - Podfiles MUST specify the specific version of the cocoapod that the code was built using.
-- The version of a Podfile used in an app MUST BE updated automatically by the development team if that version of the plugin is deprecated or moved out of support by the 3rd party. (ie. Google Places SDK stopped supporting Version 2.7, we need to make sure across all apps we update our Google Places plugins to the *oldest supported* version)
+- The version of a Cocoapod used in an app MUST BE updated automatically by the development team if that version of the plugin is deprecated or moved out of support by the 3rd party. (ie. Google Places SDK stopped supporting Version 2.7, we need to make sure across all apps we update our Google Places plugins to the *oldest supported* version)
 
 ### 5. Passwords & Security
 Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore
@@ -47,4 +48,9 @@ API tokens for 3rd party services that are embedded into the source code (Google
 - Production apps MUST USE client provided API keys. No app should be released into production using a API KEY created by the development team.
 - Verify all Google API keys used are associated with an account that has billing information provided.
 - API Keys that grant access to permission to AWS, Azure or other sensitive 3rd party platforms MUST BE downloaded from the server upon app launch and MUST NOT be embedded in the source code.
+- Stripe API keys **must not** be downloaded or exposed via API as they are never needed on the front-end side. Instead for all operations that require a Stripe API key, expose an authenticated method on the server and have the server peform these operations for the app. (ie. Adding a payment method)
 
+### 8. Error messaging from API
+When a app receives an error from the API it **must** do the following:
+- In the case of a HTTP 401 (Unauthorized), the app **must** redirect the user to the login screen.
+- In the case of a HTTP 500 (Error), the app **must** use the Error Code returned from the API to find and display a localized string from the app bundle. The app **should not** return the error title/description strings returned from the API.

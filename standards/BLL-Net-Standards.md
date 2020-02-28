@@ -3,6 +3,8 @@
 - Version: 1.0
 ---
 
+Starting in 01/2020, all new projects leveraging .NET **must** be built using .NET Core 3.0+. We are fully deprecating our use of .NET Framework.
+
 ### 1. Usage of References
 Always add references via Nuget, **do not** add DLLs directly as references to the project.
 

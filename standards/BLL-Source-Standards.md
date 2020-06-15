@@ -28,6 +28,8 @@ All source code files must have the copyright headers inserted by XCode removed 
 
 Commits should be done regularly through development. Commits should be done to enclose specific pieces of functionality or bug fixes. Ideally a single commit should only contain one new feature, or one new bug.
 
+Commits should include as their message a link to the JIRA ticket it is resolving so that the link between JIRA tickets and BitBucket commits is established.
+
 ### 2.2 
 
 Clear, legible commit messages must be added to every commit done. If fixing a bug or JIRA/Trello issue, reference the Bug ID and the title of the bug being fixed in the commit message. For Trello issues please include a direct link to the Trello issues resolved in this commit.

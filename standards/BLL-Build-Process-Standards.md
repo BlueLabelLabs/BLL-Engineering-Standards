@@ -15,3 +15,4 @@ Dev teams should never be uploading a build to TestFlight or Google Play where t
 - All Android and iOS projects **must** be integrated into a Continuous Deployment tool for creating and distributing builds automatically. Please consult with BLL Engineering to get instructions on which tool and how to integrate.
 - All backend projects (Node/.NET Core/etc) **must** be integrated into a Continuous Deployment tool for pushing new releases to sandbox and production environments. Please consult with BLL Engineering to get instructions on which tool and how to integrate.
 
+

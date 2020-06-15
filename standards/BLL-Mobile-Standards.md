@@ -47,10 +47,10 @@ Android code should be protected with proguard.
 API tokens for 3rd party services that are embedded into the source code (Google Places, Crashlytics, etc.) must follow the following guidelines:
 - Production apps MUST USE client provided API keys. No app should be released into production using a API KEY created by the development team.
 - Verify all Google API keys used are associated with an account that has billing information provided.
-- API Keys that grant access to permission to AWS, Azure or other sensitive 3rd party platforms MUST BE downloaded from the server upon app launch and MUST NOT be embedded in the source code.
+- API Keys that grant access to permission to AWS, Azure or other sensitive 3rd party platforms **must not** ever be accessed or downloaded by the app through the API, authenticated or not. All operations requiring the use of these tokens **must** be proxied through the server via an authenticated method.
 - Stripe API keys **must not** be downloaded or exposed via API as they are never needed on the front-end side. Instead for all operations that require a Stripe API key, expose an authenticated method on the server and have the server peform these operations for the app. (ie. Adding a payment method)
 
 ### 8. Error messaging from API
 When a app receives an error from the API it **must** do the following:
-- In the case of a HTTP 401 (Unauthorized), the app **must** redirect the user to the login screen.
+- In the case of a HTTP 403 (Unauthorized), the app **must** redirect the user to the login screen.
 - In the case of a HTTP 500 (Error), the app **must** use the Error Code returned from the API to find and display a localized string from the app bundle. The app **should not** return the error title/description strings returned from the API.

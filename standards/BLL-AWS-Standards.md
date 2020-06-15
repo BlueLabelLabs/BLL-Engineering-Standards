@@ -9,47 +9,20 @@
 
 ### 2. All S3 Buckets must be locked down with the appropriate bucket permissions
 - All S3 buckets must only allow create/edit/browse/delete permissions to an AWS IAM user account that will be used by the app. Buckets MUST not be accessible for create/edit/browse/delete to unauthenticated users.
-- It is generally ok, unless requested by the client or PM team, to allow bucket items to be read without a IAM user account.
-- Use the following bucket policy for all S3 buckets, this will enable public read while restricting write/edit/create/delete to a specific IAM user account. (Public Read Private Write)
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Deny",
-            "NotPrincipal": {
-                "AWS": "arn:aws:iam::905588271239:user/AWS_S3_User"
-            },
-            "NotAction": "s3:GetObject",
-            "Resource": "arn:aws:s3:::S3_Folder/*"
-        },
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::905588271239:user/AWS_S3_User"
-            },
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObjectAcl",
-                "s3:GetObject",
-                "s3:DeleteObject",
-                "s3:PutObjectAcl"
-            ],
-            "Resource": "arn:aws:s3:::S3_Folder/*"
-        }
-    ]
-}
-- Note: Add "DeleteObject" Action only when Application demands Delete permission for IAM User.
+- All S3 buckets **must** not allow public browsing, access of files within (except for static content needed for front end websites/clients)
+- All S3 buckets **must** not allow public access to files through a URL, even if those files are to be displayed on public, non-authenticated URLs. All access to files stored on S3 **must** be done through the use of pre-signed AWS URLs with a defined a expiry time.
+
 
 
 ### 3. Create a new AWS IAM User to be used by any app/web site to write/create/delete/browse an S3 bucket
 - DO NOT USE THE ROOT IAM USER's TOKEN!
 - Create a new IAM User in the AWS Management console, disable the password.
 - Make sure any policies or roles are not associated to new IAM User.
-- Embed the token/token secret for the above created account into the app for use in accessing S3 resources.
+ 
 
 ### 4. AWS tokens MUST NOT be stored in the source code of the front-end app
-- Retrieve the tokens to be using on the client side through an authenticated call made to the backend web service. The source code should never have hard coded AWS token or token secrets contained within.
+- **DO NOT** embed the token/token secret into any front-end code, either mobile app or web client.
+- All operations which require the use of the token/token secret to access a AWS resource must be proxied through a back end server, which **must** never expose the token/token secret via its API to the client.
 
 ## Access Control to AWS Resources
 

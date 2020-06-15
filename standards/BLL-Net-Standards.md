@@ -3,7 +3,9 @@
 - Version: 1.0
 ---
 
-Starting in 01/2020, all new projects leveraging .NET **must** be built using .NET Core 3.0+. We are fully deprecating our use of .NET Framework.
+All new projects leveraging .NET **must** be built using .NET Core 3.0+. We are fully deprecating our use of .NET Framework. 
+
+All new projects **must** not use any Windows Service components. Instead, all batch or timed jobs **must** use AWS Lambda (or Azure equivalent) serverless functions for implementation.
 
 ### 1. Usage of References
 Always add references via Nuget, **do not** add DLLs directly as references to the project.
@@ -16,19 +18,13 @@ Web portals should all have Elmah error logging integration enabled.
 
 All tracing within code **must** be done using the System.Diagnostics trace facility. **DO NOT** under any circumstance manually open filestreams and output your log statements to that. 
 
-### 4. API Versioning
-API’s should be versioned and have optional ability to force upgrades on clients
-- Each new major revision of the API should be versioned so that only new downloads of the app will point to the new api version, thus allowing backwards compatibility for old versions of the app.
-- The API version should be integrated into the URL string for the server app. For example if we are building a server for the Muncheez project, the URL should look like:
-    - https://\<baseurl>/Muncheez/api/**v12**/Login
-
 ### 5. Portal Versioning
 Web portals should also have version numbers that are properly incremented and kept track of in the git repository. These version numbers should be visible somewhere in the web portal.
 
 ### 6. Static Content
 All images or user uploaded static content **must** be stored on Amazon S3 (or equivalent). Do not store images on the application server.
-- Bucket policy must be configured so that we **disable** direct browsing on the bucket.
-- Unless specifically requested by the client, it is ok to allow individual S3 files to be accessible by anyone.
+- Bucket policy must be configured so that we **disable** all public access to the bucket and the files within, except for static images/resources needed for the running of front end web sites and clients.
+- All access to content within S3 **must** be done through the use of pre-signed URLs with a defined time limit/expiry time. Under no circumstance should we allow direct, public access to images/files (except for those listed in the previous point) in an S3 bucket. 
 
 ### 7. Password Hashing and Salting
 - There should be no need to store passwords in the database if you are using ASP.NET OWIN's infrastructure, which you should be, it handles the password storage on its own. However, if you must store passwords on the server:
@@ -54,16 +50,3 @@ All images or user uploaded static content **must** be stored on Amazon S3 (or e
      -*RIGHT*: write it SELECT * FROM USER WHERE ID=@userID
 
 
-### 12. HTTP Response Codes and API Error Responses
-- All API must return proper HTTP response codes for success and error conditions. If the processing of a request results in an error, the API **must not** return an HTTP 200. 
-- The following HTTP response codes should be utilized in general:
-    - 200: Returned whenever a the API operation completed successfully.
-    - 401: Returned whenever an API operation failed due to a missing or invalid authentication token. Upon receiving a 401, the app front-end **should** redirect to a login screen.
-    - 500: All other errors during processing **must** return an HTTP 500 error.
-
-#### 12.1 HTTP 500 Error Response Structure
-- When a HTTP 500 error is returned it **should** contain a JSON error message structure containing the following fields of data:
-    - Error Code: an integer uniquely representing this error condition.
-    - Title: a string describing in brief what the error is. (optional)
-    - Description: a full-text description of what the error is.(optional)
-- The front end of the app **should** display only the Error Code to the user and **should** use the Error Code to locate a localized string description to display to the user.

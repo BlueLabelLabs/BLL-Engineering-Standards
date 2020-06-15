@@ -10,5 +10,7 @@ These are the collected standards for the BLL Engineering team.
 | 5. | [AWS Standards](standards/BLL-AWS-Standards.md)
 | 6. | [Date & Time Standards](standards/BLL-DateTime-Standards.md)
 | 7. | [Wordpress Standards](standards/BLL-Wordpress-Standards.md)
+| 8. | [API Standards](standards/BLL-API-Standards.md)
+| 9. | [Database Standards](standards/BLL-Database-Standards.md)
 ### For More
 Visit [https://www.bluelabellabs.com/](https://www.bluelabellabs.com/) to see more.

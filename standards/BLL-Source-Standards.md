@@ -17,6 +17,8 @@ All source code files must be spelled properly with proper grammar and must be T
 * "Utill.swift" - WRONG, it should be "Util.swift"
 * "appDefaultsManager.swift" - WRONG, it should be "AppDefaultsManager.swift"
 
+Additionally, variable names should be self-explanatory.
+
 This includes ALL files, not just source code files but XCode project files, workspace files or .NET solution/project files.
 
 #### 1.1b **All source code files must NOT contain any copyright statements**
@@ -26,7 +28,7 @@ All source code files must have the copyright headers inserted by XCode removed 
 
 ### 2.1. 
 
-Commits should be done regularly through development. Commits should be done to enclose specific pieces of functionality or bug fixes. Ideally a single commit should only contain one new feature, or one new bug.
+Commits should be done regularly through development. Commits should be done to enclose specific pieces of functionality or bug fixes. Ideally a single commit should only contain one new feature, or one new bug. Commits should not contain commented out code whatsoever!
 
 Commits should include as their message a link to the JIRA ticket it is resolving so that the link between JIRA tickets and BitBucket commits is established.
 

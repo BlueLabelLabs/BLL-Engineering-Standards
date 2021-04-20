@@ -37,6 +37,11 @@ Passwords, and any other secure login information, **must** be stored in the iOS
 Android code should be protected with proguard.
 - Ensure code obfuscation is turned on.
 
+##### App Signing
+
+- [Process For Securely Managing Play Store Signing Keystores](../processes/BLL-Process-For-Securely-Managing-Play-Store-Signing-Keystores.md)
+- [Process For Securely Managing App Store Store Signing Certificates](../processes/BLL-Process-For-Securely-Managing-App-Store-Signing-Certificates.md)
+
 ### 6. Handling User Sessions
 - When a user logs in to a web service and receives a OAuth access token, this access token **must** be stored within the platform keychain and not in UserDefaults.
 - Unless otherwise specified by the client, OAuth access tokens should be set with an expiry time of at least 1 month.

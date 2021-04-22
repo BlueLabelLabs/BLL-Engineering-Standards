@@ -1,5 +1,7 @@
 ### Process for Securely Managing App Store Signing Certificates
 
+##### Overview: The Engineering Manager is responsible for creating the App Signing Certificates and sharing it with the Developers using the following process:  
+
 1. Generate a certificate signing request using Keychain Assistant
 2. Create the desired certificate using the CSR generated in Step 1
 3. Download and install the certificate locally

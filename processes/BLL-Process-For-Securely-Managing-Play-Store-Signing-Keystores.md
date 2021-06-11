@@ -1,5 +1,7 @@
 ### Process for Securely Managing Play Store Signing Keystore
 
+##### Overview: The Engineering Manager is responsible for creating the App Signing Keystore and sharing it with the Developers using the following process:  
+
 1. In Android Studio, select Build > **Generate Signed Bundle or APK**
 2. Select Android App Bundle > **Next**
 3. Under the Key store path field, select **Create New**

@@ -22,12 +22,14 @@ Firebase Crashlytics should be integrated into every build.
 - Sandbox: \<App Name> - Sandbox
 
 ### 4. CocoaPods
-Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps.
+Use CocoaPods (when available) for integrating 3rd party libraries into iOS apps. Never manually copy and paste a library available as a CocoaPod dependency.
 
+- Please review a CocoaPod library before checking it in. Things to consider are: security vulnerabilities, how close it is to end of life (should not already be warning you that it will be deprecated -- make sure it is still in active development), and usefulness -- a Pod should not be doing something already provided by the mobile SDK.
 - CocoaPods **must** be properly integrated into an XCode project, ie. copying the source code from a CocoaPod and pasting it into the app is **never** to be done. They **must** be properly referenced via Podfile and integrated via the "pod install" mechanism.
-- CocoaPods MUST be checked into the Git source tree.
+- CocoaPods MUST be checked into git in its own commit clearly stating the reason why it was added and what it will be used for.
 - Podfiles MUST specify the specific version of the cocoapod that the code was built using.
 - The version of a Cocoapod used in an app MUST BE updated automatically by the development team if that version of the plugin is deprecated or moved out of support by the 3rd party. (ie. Google Places SDK stopped supporting Version 2.7, we need to make sure across all apps we update our Google Places plugins to the *oldest supported* version)
+- Do not check in a pod that is used for local development. For example, a debugging tool name FLEX (https://github.com/FLEXTool/FLEX) is available as a Pod, but will be rejected by Apple due to it being designed for only development use.  
 
 ### 5. Passwords & Security
 Passwords, and any other secure login information, **must** be stored in the iOS Keychain or Android Keystore

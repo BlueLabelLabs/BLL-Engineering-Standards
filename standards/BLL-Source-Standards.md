@@ -36,7 +36,11 @@ Commits should include as their message a link to the JIRA ticket it is resolvin
 
 Clear, legible commit messages must be added to every commit done. If fixing a bug or JIRA/Trello issue, reference the Bug ID and the title of the bug being fixed in the commit message. For Trello issues please include a direct link to the Trello issues resolved in this commit.
 
-## 3.0. **Branches**
+## 3.0 Pull Requests
+
+Pull requests must be made to merge feature/task development branches into restricted branches like a sandbox/staging or master branch. Pull requests must be titled with the JIRA ticket that the merging code will represent and the Pull Request option that should be selected is 'Squash and merge'. The merging commit message should state the JIRA ticket as well. In the event that the branch being merged has multiple commits with each commit resolving a JIRA ticket (again, with the JIRA tickets in each commit message), the Pull Request option that should be selected is 'Create a merge commit'. Our goal is to preserve each state of the project where a specific ticket is resolved. This gives us the ability to revert changes for a JIRA ticket if we ever need to.
+
+## 4.0. **Branches**
 ![](../images/branch-example.png?raw=true)
 
 ### 3.1 All repositories must have at least 2 branches:

@@ -16,7 +16,7 @@
     - Brief method description
     - Return type and description
     - Error codes returned.
-
+- Postman documentation **must** not be publically accessible and only visibile within the Postman Workspace, unless explcitily requested.
 ### 3. All APIs **must** adhere to standard HTTP method semantics, where applicable:
 -   GET - **Must** only be used when accessing or retrieving  resource.
 -   POST - **Must** be used when modifying a resource.

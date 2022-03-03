@@ -61,3 +61,9 @@ API tokens for 3rd party services that are embedded into the source code (Google
 When a app receives an error from the API it **must** do the following:
 - In the case of a HTTP 403 (Unauthorized), the app **must** redirect the user to the login screen.
 - In the case of a HTTP 500 (Error), the app **must** use the Error Code returned from the API to find and display a localized string from the app bundle. The app **should not** return the error title/description strings returned from the API.
+
+### 9. Linters
+For better readability of code, we follow certain coding style and linters can aid us in pointing out those errors as we build the codebase.
+- For iOS, it is recommended to use Swiftlint (https://github.com/realm/SwiftLint)
+- Linters should run as part of the build process. Every warning **must** be corrected before committing the code. Alternatively, a pre-commit hook for linter can be setup for the project.
+- For starter, We follow Raywenderlich style guide(https://github.com/raywenderlich/swift-style-guide). Unless the client requires us to implement their own coding style

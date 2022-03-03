@@ -61,3 +61,8 @@ API tokens for 3rd party services that are embedded into the source code (Google
 When a app receives an error from the API it **must** do the following:
 - In the case of a HTTP 403 (Unauthorized), the app **must** redirect the user to the login screen.
 - In the case of a HTTP 500 (Error), the app **must** use the Error Code returned from the API to find and display a localized string from the app bundle. The app **should not** return the error title/description strings returned from the API.
+
+### 9. Linters
+When committing the source code **must** checked for programmatic and stylistic errors using linting.
+- In the case of Android the app **must** use [Ktlint](https://github.com/pinterest/ktlint), which tries to capture (reflect) official code style from [kotlinlang.org](https://kotlinlang.org/docs/reference/coding-conventions.html) and [Android Kotlin Style Guide](https://android.github.io/kotlin-guides/style.html).
+- When implementing linting to an Android project it **must** also include a [pre-commit linting](../processes/BLL-Process-For-Pre-Commit-Linting-On-Android.md) to ensure that the source code pushed to the repository has no programmatic and stylistic errors.

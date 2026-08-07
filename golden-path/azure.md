@@ -42,3 +42,4 @@ the defaults we reach for, and how to choose when they do not settle it.
 How a health monitor is *hosted and run* on Azure — independent of the monitoring **approach**, which is workload-driven (see `universal-baseline`).
 - Host the monitor as an **Azure Function**, reading config from Application Settings (secrets from Key Vault) and posting to a **Slack incoming webhook**.
 - Trigger follows the chosen approach: **Event Grid** for event/log-driven monitoring; a **Timer** trigger for scheduled active probing.
+- Safety net: an **Azure Monitor alert** on the Function's own failures → an **action group** posts to the same Slack channel, so the monitor failing still alerts.

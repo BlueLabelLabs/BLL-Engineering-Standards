@@ -16,7 +16,7 @@ These cover what must be true of the software and how we build it. They say noth
 
 Cite the ID in a review comment or an agent instruction. A guideline lives here and nowhere else, so there is never a second version to drift. IDs are stable, and a retired guideline's ID is never reused.
 
-Three companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand, and [Source control](source-control.md), because a branching model is easier to show than to list. There is no page per domain, and most domains do not need one.
+Four companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand, [Source control](source-control.md), and [Alerting](alerting.md). There is no page per domain, and most domains do not need one.
 
 Roles referenced below: **Engineering Architect** and **Operations Team**.
 
@@ -166,6 +166,12 @@ Applies to everyone who directs an agent, product and engineering alike.
 | OPS-018 | Configuration that differs by environment is externalized, not hard-coded. |
 | OPS-019 | Every project MUST have continuous integration and continuous deployment. Builds and deployments MUST NOT be run by hand from an engineer's machine. |
 | OPS-020 | CI/CD runs on **GitHub Actions**. AWS CodePipeline is legacy: projects already running it may stay, new projects MUST NOT adopt it. Use a client's own pipeline only where the client requires it. |
+| OPS-021 | Alerting MUST cover both **impairment** (degraded latency, elevated error rates, a failing dependency) and **hard failure** (the service is down). Alerting only on hard failure misses the more common case. |
+| OPS-022 | The monitoring approach follows the workload: **active health probing** (a health endpoint plus a synthetic round trip, with latency thresholds) for live request/response services; **log and event-based monitoring** for batch jobs and data pipelines. |
+| OPS-023 | Monitors MUST be built on the cloud platform's native services and provisioned as code like any other infrastructure. On AWS, a Lambda on an EventBridge schedule. On Azure, a Function on a Timer or Event Grid trigger. |
+| OPS-024 | A monitor MUST keep its configuration and state **outside the application's own datastore**, so it survives an outage of the thing it is monitoring. |
+| OPS-025 | The monitor is itself monitored. A platform-native alarm on the monitor's own failures posts to the same Slack channel, so a monitor that has stopped working still raises an alert. |
+| OPS-026 | Every alert MUST name the service, the environment, and what the responder should do. An alert that fires routinely and is routinely ignored MUST be fixed or removed. |
 
 ## SCM — Source control
 

@@ -119,6 +119,11 @@ A change that crosses one of these is architectural, and it needed a decision be
 | [OPS-013](README.md#ops--build-release-and-operations) | Version and build number visible in the running application |
 | [OPS-015](README.md#ops--build-release-and-operations) | Production ships with client-provided third-party keys |
 | [OPS-016](README.md#ops--build-release-and-operations) | Structured logs, traceable across requests |
+| [OPS-017](README.md#ops--build-release-and-operations) | Monitoring ships with the thing, not after the first incident |
+| [OPS-021](README.md#ops--build-release-and-operations) | Alerting covers impairment, not only hard failure |
+| [OPS-024](README.md#ops--build-release-and-operations) | The monitor's state lives outside the datastore it watches |
+| [OPS-025](README.md#ops--build-release-and-operations) | The monitor is itself monitored |
+| [OPS-026](README.md#ops--build-release-and-operations) | Alerts name the service, environment, problem, and next action |
 | [OPS-018](README.md#ops--build-release-and-operations) | Environment-specific configuration externalized |
 
 ### Source control

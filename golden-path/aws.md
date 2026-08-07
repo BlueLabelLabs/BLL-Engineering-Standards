@@ -25,7 +25,7 @@ the defaults we reach for, and how to choose when they do not settle it.
 - Object storage: **Amazon S3**.
 - Async messaging: **Amazon SQS** — keep it simple (no SNS/EventBridge messaging bus). No Kinesis / streaming.
 - Container registry: **Amazon ECR**.
-- CI/CD: **AWS CodePipeline + CodeBuild + CodeDeploy** — on AWS this overrides the universal GitHub Actions default (Terraform still provisions infrastructure).
+- CI/CD: **GitHub Actions**, per `universal-baseline`. **CodePipeline + CodeBuild + CodeDeploy is legacy** — retained on existing AWS projects that already run it, never chosen for new work. (Terraform still provisions infrastructure either way.)
 - Environment isolation: development / staging / production live in **separate AWS accounts** (sub-organizations under AWS Organizations).
 - Frontend: **React frontends are statically hosted on CloudFront** (S3 + CloudFront); backend on ECS/ALB. **CloudFront** is the CDN.
 - Model access (agentic): the **OpenAI API endpoint** (the non-Azure default, per the `agentic-system` pack).

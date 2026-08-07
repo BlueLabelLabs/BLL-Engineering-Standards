@@ -165,7 +165,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | OPS-017 | Everything we build ships with health monitoring that detects degradation and alerts to BlueLabel's Slack channels. |
 | OPS-018 | Configuration that differs by environment is externalized, not hard-coded. |
 | OPS-019 | Every project MUST have continuous integration and continuous deployment. Builds and deployments MUST NOT be run by hand from an engineer's machine. |
-| OPS-020 | CI/CD runs on **GitHub Actions**. Use a client's own pipeline only where the client requires it. |
+| OPS-020 | CI/CD runs on **GitHub Actions**. AWS CodePipeline is legacy: projects already running it may stay, new projects MUST NOT adopt it. Use a client's own pipeline only where the client requires it. |
 
 ## SCM — Source control
 

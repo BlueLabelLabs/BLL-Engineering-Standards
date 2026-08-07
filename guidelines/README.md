@@ -107,7 +107,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | API-009 | An API MUST NOT return another user's personal fields (email, phone, address, date of birth) to a caller who is not that user. |
 | API-010 | OTP validation happens on the server. The code is never returned to or compared by the client. |
 | API-011 | Old-password verification on password change happens on the server. |
-| API-012 | All datetimes cross the API boundary in UTC, inbound and outbound. |
+| API-012 | All datetimes cross the API boundary in UTC, inbound and outbound, formatted as **ISO 8601 with an explicit offset** (`2026-08-07T14:30:00Z`). |
 | API-013 | Background and long-running work MUST go to a durable queue and a serverless processor. Never the request path. |
 | API-014 | A project that exposes an API also scaffolds a companion MCP server using the same authentication provider. |
 
@@ -129,6 +129,9 @@ Applies to everyone who directs an agent, product and engineering alike.
 | DAT-012 | Object storage is never public. Access is via pre-signed URLs with a defined expiry. |
 | DAT-013 | Non-production environments MUST NOT contain real PHI, and SHOULD NOT contain real PII. Use de-identified or synthetic data. |
 | DAT-014 | MongoDB MAY be used where the data model warrants it. When used, it MUST run in **BlueLabel's managed MongoDB Atlas account**. Standalone Atlas organizations and self-hosted MongoDB MUST NOT be used. |
+| DAT-015 | Datetimes are stored in **UTC**. Naive or local timestamps MUST NOT be stored. |
+| DAT-016 | A value that is a date without a time (a birth date, an invoice date) is stored as a **date**, not a timestamp. |
+| DAT-017 | Where local time matters to the user, the **IANA timezone identifier** (`America/New_York`) is stored alongside the UTC value. A fixed UTC offset MUST NOT be stored in its place, because offsets change with daylight saving and legislation. |
 
 ## AI — AI and agentic systems
 

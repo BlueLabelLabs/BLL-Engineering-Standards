@@ -75,6 +75,9 @@ The first five are the ones we get wrong most often, in human and agent code ali
 | [DAT-009](README.md#dat--data) | Every query supported by an index |
 | [DAT-010](README.md#dat--data) | No binary data in the database |
 | [SEC-012](README.md#sec--security) | PII encrypted at rest and in transit |
+| [DAT-015](README.md#dat--data) | Datetimes stored in UTC, never naive or local |
+| [DAT-016](README.md#dat--data) | A date without a time is a date, not a timestamp |
+| [DAT-017](README.md#dat--data) | Local time stored as an IANA identifier, not a fixed offset |
 
 ### Secrets and identity
 

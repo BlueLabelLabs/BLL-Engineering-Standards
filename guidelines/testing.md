@@ -61,6 +61,25 @@ UI and end-to-end suites are where this bites, because the easy response to an i
 
 Tests also must not depend on a shared or long-lived environment ([QUA-005](README.md#qua--quality)). A suite that only passes against someone's sandbox is not a suite, and it is usually where flakiness comes from in the first place.
 
+## LLM evaluations
+
+An LLM feature has no error rate. It stays up, returns a well-formed answer, and the answer is worse than it was last week. Unit tests cannot see that, and neither can a UI test, because nothing threw.
+
+Evals are the test suite for the part of the system that fails quietly.
+
+**Golden ground-truth datasets.** Every LLM feature has an automated eval suite run against a maintained set of representative inputs with their known-good outputs, versioned in the repository alongside the code ([AI-011](README.md#ai--ai-and-agentic-systems)). Without a ground truth you are not measuring quality, you are reading samples and forming an impression.
+
+**They do not run on every push** ([AI-012](README.md#ai--ai-and-agentic-systems)). This is a deliberate exception to [QUA-004](README.md#qua--quality), and the only one. A full eval suite costs real money in model calls and real minutes in wall clock, and running it on every commit to a feature branch buys nothing an engineer could not get by running it themselves. Instead:
+
+- **On demand**, so an engineer changing a prompt can measure the effect before opening a pull request. A `workflow_dispatch` GitHub Action is the usual mechanism.
+- **Automatically on merge to a long-lived branch**, `develop`, `staging`, and `main`, so nothing reaches an environment without having been measured.
+
+That cadence puts the gate where it matters. Nothing reaches production without passing ([AI-003](README.md#ai--ai-and-agentic-systems)), and nobody waits twenty minutes to fix a typo.
+
+**The dataset is maintained, not written once** ([AI-013](README.md#ai--ai-and-agentic-systems)). New capabilities add cases. More importantly, **every regression found in production adds a case**, which is the same discipline as a bug fix shipping with a failing test ([QUA-003](README.md#qua--quality)). A dataset that has not grown in six months is measuring a system that no longer exists.
+
+**Results are recorded and comparable across runs** ([AI-014](README.md#ai--ai-and-agentic-systems)). The question at review time is not "did the evals pass" but "what did this change do to answer quality," and that needs a previous run to compare against. Tracing and evaluation live in LangSmith by default.
+
 ## What we do not do
 
 **Coverage targets.** A percentage is easy to satisfy without testing anything, and chasing one produces tests written to move the number rather than to catch defects. Review whether the important paths are covered, which is a judgment a person makes and a metric cannot.

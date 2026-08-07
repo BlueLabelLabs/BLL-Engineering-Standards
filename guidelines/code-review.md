@@ -106,6 +106,8 @@ A change that crosses one of these is architectural, and it needed a decision be
 | [AI-007](README.md#ai--ai-and-agentic-systems) | Multimodal ingestion decided up front for a RAG system |
 | [AI-009](README.md#ai--ai-and-agentic-systems) | Experiments reproducible: versioned notebooks, prompts, datasets |
 | [AI-010](README.md#ai--ai-and-agentic-systems) | Hypothesis, success criteria, and decision gate defined before starting |
+| [AI-011](README.md#ai--ai-and-agentic-systems) | An eval suite exists, run against a versioned golden ground-truth dataset |
+| [AI-013](README.md#ai--ai-and-agentic-systems) | A production regression added a case to the golden dataset |
 
 ### Infrastructure and deployment
 

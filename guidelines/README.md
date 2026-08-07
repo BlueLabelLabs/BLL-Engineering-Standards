@@ -136,7 +136,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | --- | --- |
 | AI-001 | Prompts are versioned in a prompt-management system. No inline prompt literals in application code. |
 | AI-002 | Tracing spans the whole application across all boundaries, not just model calls. |
-| AI-003 | Evaluations are defined and run on every prompt, model, or retrieval change. Nothing ships without passing them. |
+| AI-003 | Evaluations are defined for every prompt, model, and retrieval path. Nothing reaches production without passing them. |
 | AI-004 | PII does not leave BlueLabel-controlled systems. Data sent to an external model provider is minimized and redacted. |
 | AI-005 | Retrieval-augmented answers cite their sources, with document and location, so users can verify. |
 | AI-006 | Hybrid retrieval (semantic plus keyword) and reranking are the default, not add-ons. |
@@ -144,6 +144,10 @@ Applies to everyone who directs an agent, product and engineering alike.
 | AI-008 | Regulated engagements use a BAA-covered model endpoint. Never the public OpenAI API. |
 | AI-009 | Experiments are reproducible and tracked: versioned notebooks, prompts, and datasets. |
 | AI-010 | An experimentation workstream has an explicit hypothesis, success criteria, and decision gate defined before it starts. |
+| AI-011 | Every LLM feature MUST have an automated evaluation suite run against a **golden ground-truth dataset**: representative inputs with their known-good outputs, versioned in the repository alongside the code. |
+| AI-012 | Eval suites MUST NOT run on every push. They run **on demand**, and automatically on merge to a long-lived branch (`develop`, `staging`, `main`). This is a deliberate exception to [QUA-004](#qua--quality). |
+| AI-013 | The golden dataset is maintained as the system changes. New capabilities add cases, and **every regression found in production adds a case**. |
+| AI-014 | Eval results MUST be recorded and comparable across runs, so the effect of a change on answer quality is visible rather than asserted. |
 
 ## OPS — Build, release, and operations
 

@@ -6,9 +6,9 @@ owner: Bobby Gill
 last_reviewed: 2026-08-07
 ---
 
-# How these standards are governed
+# How these guidelines are governed
 
-The first version of these standards died of neglect. It was written once, published, and then nothing in our daily work touched it again. Four years later it recommended .NET Core 3.0, Postman as the API contract, and security groups pinned to a single person's home IP address. The lesson is not that people were careless. It is that a standards document with no forcing function is a snapshot, not a standard.
+The first version of these guidelines died of neglect. It was written once, published, and then nothing in our daily work touched it again. Four years later it recommended .NET Core 3.0, Postman as the API contract, and security groups pinned to a single person's home IP address. The lesson is not that people were careless. It is that a written guideline with no forcing function is a snapshot, not a guideline.
 
 So the rules below are mostly about keeping this honest.
 
@@ -20,19 +20,19 @@ Each document names an owner in its frontmatter. The owner is responsible for it
 
 **Generated documents have no individual owner.** They are rendered from the golden-path rule packs in BlueLabel's methodology repo. Their content is owned by whoever owns the pack.
 
-## How a standard changes
+## How a guideline changes
 
 There are two paths, and which one you use depends on the document's status.
 
 **For `generated` documents:** change the rule pack in the methodology repo. The generator opens a pull request here automatically. Do not edit the rendered file. Any hand-edit is overwritten on the next generation run, silently, which is worse than being rejected.
 
-**For everything else:** open a pull request against this repo. A standard changes when its owner and one other engineer approve. Substantive changes to a `MUST` need Bobby's approval as well.
+**For everything else:** open a pull request against this repo. A guideline changes when its owner and one other engineer approve. Substantive changes to a `MUST` need Bobby's approval as well.
 
 Either way, say what problem the change solves. "We keep hitting X" is a good reason. "This seems more modern" is not.
 
-## Deviating from a standard
+## Deviating from a guideline
 
-Deviation is expected. Every engagement has a constraint that the golden path did not anticipate, and a standard that forbids adaptation just gets ignored, which costs us the visibility we were trying to buy.
+Deviation is expected. Every engagement has a constraint that the golden path did not anticipate, and a guideline that forbids adaptation just gets ignored, which costs us the visibility we were trying to buy.
 
 The rule is that deviation is **conscious and recorded**, never silent:
 
@@ -40,9 +40,9 @@ The rule is that deviation is **conscious and recorded**, never silent:
 2. State the reason in your own words. There is no fixed list of acceptable reasons.
 3. Note whether it is permanent or something to revisit.
 
-An engagement's constitution MAY tighten a standard. It MUST NOT loosen one without a recorded exception.
+An engagement's constitution MAY tighten a guideline. It MUST NOT loosen one without a recorded exception.
 
-When the same deviation shows up on three engagements, the standard is wrong. Open a pull request.
+When the same deviation shows up on three engagements, the guideline is wrong. Open a pull request.
 
 ## Review cadence
 
@@ -52,9 +52,9 @@ Every document carries `last_reviewed` in its frontmatter.
 - Anything past 18 months without review is automatically marked `needs-revision`.
 - Generated documents are exempt. Their freshness is a property of the packs.
 
-## Retiring a standard
+## Retiring a guideline
 
-A standard gets retired when the practice it describes is no longer how we work. Retirement is a deletion plus a line in the log below, not a document left in place with a warning on top. Stale guidance that is still readable still gets followed.
+A guideline gets retired when the practice it describes is no longer how we work. Retirement is a deletion plus a line in the log below, not a document left in place with a warning on top. Stale guidance that is still readable still gets followed.
 
 ### Retirement log
 
@@ -62,9 +62,13 @@ A standard gets retired when the practice it describes is no longer how we work.
 | --- | --- | --- |
 | 2026-08-07 | WordPress Standards | WordPress does not appear anywhere in BlueLabel's current golden path, and the guidance itself (a Bitnami marketplace image on AWS) no longer reflects how we would host a CMS. An engagement that needs WordPress should treat it as a deviation and record it. |
 
+## Scope
+
+These are engineering guidelines. They cover what must be true of the software and how we build it. They do not describe how work arrives, gets approved, or gets delivered; that process is defined outside this repository. A proposed guideline that is really a process step belongs there instead.
+
 ## Sanitization
 
-This repository is public. That is deliberate: these standards are part of how we explain ourselves to clients and to people considering joining the team. It also constrains what can go in.
+This repository is public. That is deliberate: these guidelines are part of how we explain ourselves to clients and to people considering joining the team. It also constrains what can go in.
 
 The following MUST NOT appear in any document here, generated or authored:
 

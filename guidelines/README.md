@@ -1,16 +1,18 @@
 ---
-title: The Rules
+title: Engineering Guidelines
 status: draft
 version: 0.2
 owner: Bobby Gill
 last_reviewed: 2026-08-07
 ---
 
-# The rules
+# Engineering guidelines
 
-Every rule BlueLabel holds itself to, in one place, with a stable ID. Cite the ID in a review comment, in an exception record, or in an agent instruction. A rule lives here and nowhere else. Everything in "How we build" links to these by ID rather than restating them.
+Every engineering guideline BlueLabel holds itself to, in one place, with a stable ID. Cite the ID in a review comment, in an exception record, or in an agent instruction. A guideline lives here and nowhere else.
 
-This is the decision record for the v2 rewrite. It is deliberately terse. The explanation, the enforcement mechanism, and the worked examples land in the per-domain documents once the catalog is agreed.
+These cover what must be true of the software and how we build it. They say nothing about how work arrives, gets approved, or gets delivered; that process is defined outside this repository.
+
+The catalog is deliberately terse. Two companion pages carry reasoning where a one-line rule is not enough: [Using agents](using-agents.md) and [Reviewing agent-written code](reviewing-agent-code.md). There is no page per domain, and most domains do not need one.
 
 ## How to read
 
@@ -41,7 +43,9 @@ The `Enforced by` column says what actually stops a violation. It is deliberatel
 
 Several checks marked `CI` do not exist yet. Building them is part of the scaffold work, not a separate project. Where a rule is marked `none`, that is a finding, not an oversight.
 
-Roles referenced below: **Engineering Architect**, **Operations Team**, and **Bobby Gill (Co-Founder)**.
+Roles referenced below: **Engineering Architect** and **Operations Team**.
+
+IDs are stable. A retired guideline's ID is never reused.
 
 ## Domains
 
@@ -77,7 +81,6 @@ Applies to everyone who directs an agent, product and engineering alike.
 | AGT-010 | An agent MUST NOT, without explicit human authorization for that specific action: push to a default branch, force-push a shared branch, merge its own pull request, apply a destructive migration, change production infrastructure, read or rotate production secrets, publish or deploy, delete a branch or cloud resource, send anything to a client, or commit a credential. | `new` | `hook` + `branch` |
 | AGT-011 | Authorization is **per action**. Approving one action is not standing approval for that class of action. | `new` | `hook` |
 | AGT-012 | Meaningful agent contribution MUST be disclosed in commits and pull requests. | `new` | `review` |
-| AGT-013 | What we tell a client about AI involvement follows the engagement agreement. Where it is unwritten, the answer comes from Bobby, not from the person being asked. | `new` | `none` |
 | AGT-014 | MCP servers MUST be reviewed before being connected to an engagement. An MCP server is arbitrary code with access to your session. | `new` | `config` |
 | AGT-015 | Agent configuration (permissions, hooks, skills) MUST live in the repository, not on individual machines. | `new` | `scaffold` |
 
@@ -173,19 +176,17 @@ Applies to everyone who directs an agent, product and engineering alike.
 | ID | Rule | Src | Enforced by |
 | --- | --- | --- | --- |
 | OPS-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. | `new` | `config` |
-| OPS-002 | At engagement close, repositories transfer to the client. | `new` | `none` |
 | OPS-003 | Every named artifact MUST be prefixed with its BL project code: repositories, Vercel projects, cloud accounts and resource groups, storage buckets, Passbolt entries. Machine names use lowercase `bl###-<slug>`. Jira, Passbolt paths, and prose use uppercase `BL###`. Use `blxxx-` until a code is assigned, then rename. | `new` | `review` |
 | OPS-004 | All infrastructure we create in a client cloud MUST be provisioned as code. Terraform, Bicep, and CDK are all acceptable. Use **one tool per environment**; do not mix. | `pack+` | `review` |
 | OPS-005 | Where we inherit an existing cloud environment, OPS-004 applies to resources **we** create. We do not retrofit what was already there. | `new` | `review` |
 | OPS-006 | Manual console changes MUST NOT become the source of truth. | `pack` | `CI` |
-| OPS-007 | Infrastructure state lives in the client's cloud account, following repository ownership. | `new` | `review` |
+| OPS-007 | Infrastructure state lives in the client's cloud account, never in a BlueLabel-owned account. | `new` | `review` |
 | OPS-008 | Client projects MUST have three separate environments: development, staging, and production. Separate AWS accounts under Organizations; separate Azure resource groups. | `pack+` | `review` |
 | OPS-009 | Environment identifiers in resource names are `dev`, `staging`, and `prod`. Spoken usage may vary; the identifier does not. | `new` | `CI` |
 | OPS-010 | Human access to each environment is granted through Identity Center permission sets, not per-environment credentials. | `new` | `config` |
 | OPS-011 | Every project ships with Docker, docker-compose, and a Makefile exposing `up`, `down`, `restart`, `build`, `logs`, and `test`, identical across repositories. | `pack` | `scaffold` |
 | OPS-012 | Released applications use SemVer `X.Y.Z`. Tag releases in git. | `pack` | `CI` |
 | OPS-013 | The version and build number are visible somewhere in the running application, including web portals. | `v1` | `review` |
-| OPS-014 | Clients MUST NOT be added to TestFlight or Google Play builds until the PM authorizes it. | `v1` | `none` |
 | OPS-015 | Production applications ship with client-provided third-party API keys, never keys created by the development team. | `v1` | `review` |
 | OPS-016 | Every service emits structured logs and is traceable across requests. | `pack` | `review` |
 | OPS-017 | Everything we build ships with health monitoring that detects degradation and alerts to BlueLabel's Slack channels. | `pack` | `scaffold` |
@@ -225,36 +226,36 @@ Internal tools, one-off utilities, and internal proofs of concept built by the B
 
 ## Where the catalog stands
 
-113 rules across nine domains.
+110 guidelines across nine domains.
 
-| Source | Count |
-| --- | --- |
-| `pack` | 54 |
-| `pack+` | 4 |
-| `new` | 42 |
-| `v1` | 13 |
+| Source | Count | Meaning |
+| --- | --- | --- |
+| `pack` | 54 | Generated from the golden-path packs. Self-maintaining. |
+| `pack+` | 4 | In the packs, but our decisions change them. Pack edits pending. |
+| `new` | 40 | Decided during the v2 rewrite. |
+| `v1` | 12 | Survived from the 2019 to 2023 standards. |
 
 | Primary enforcement | Count | |
 | --- | --- | --- |
-| `review` | 46 | Depends entirely on who reviews and how carefully |
+| `review` | 46 | The weak point. Depends entirely on who reviews, and how carefully |
 | `agent` | 15 | Probabilistic |
 | `CI` | 14 | Several of these checks do not exist yet |
-| `none` | 14 | See below |
-| `config` | 11 | |
-| `scaffold` | 8 | |
+| `none` | 11 | See below |
+| `config` | 11 |  |
+| `scaffold` | 8 |  |
 | `hook` | 4 | Bypassable |
-| `gate` | 1 | |
+| `gate` | 1 |  |
 
-**Forty-six rules rest on code review.** That is the honest weak point of this catalog. Review is the enforcement of last resort, and a rule that depends on it is only as good as the reviewer's attention on the day. Where a `review` rule protects something expensive, it is a candidate for becoming a CI check.
+**46 guidelines rest on code review.** That is the honest weak point of this catalog. Review is the enforcement of last resort, and a guideline that depends on it is only as good as the reviewer's attention on the day. Where a `review` guideline protects something expensive, it is a candidate for becoming a CI check.
 
-### The fourteen rules nothing enforces
+### The 11 with no enforcement
 
-These are listed as a finding, not an oversight. Three groups:
+Listed as a finding, not an oversight.
 
-**Definitional, and fine.** `SEC-002` (policy precedence) and `ARC-001` (what counts as architecture) define terms rather than constrain behavior. There is nothing to enforce.
+**Definitional, and fine.** `SEC-002` (policy precedence) and `ARC-001` (what counts as architecture) define terms rather than constrain behavior.
 
-**Procedural, enforced by a person doing their job.** `OPS-002` (repos transfer at close), `OPS-014` (clients on builds only when the PM says so), `INT-005` (tool ownership), `AGT-013` (client disclosure), `SEC-006` and `SEC-007` (Passbolt as store of record, Doppler as transport). These are real rules with no technical control available. They hold because someone is accountable, or they do not hold.
+**Held by a person doing their job.** `SEC-006` and `SEC-007` (Passbolt as store of record, Doppler as transport only) and `INT-005` (internal tool ownership). Real guidelines with no technical control available.
 
-**Genuinely uncomfortable.** `AGT-006` (no client secrets in a prompt), `AGT-007` (PII minimized before it reaches a model), `DAT-013` (no real PHI in non-production), and `INT-007` (internal tools inherit engagement data rules). Four rules protecting client data, none of them enforceable by anything we can build. They are the highest-consequence rules in the catalog and the least defended.
+**Genuinely uncomfortable.** `AGT-006` (no client secrets in a prompt), `AGT-007` (PII minimized before it reaches a model), `DAT-013` (no real PHI in non-production), and `INT-007` (internal tools inherit engagement data rules). Four guidelines protecting client data, none enforceable by anything we can build. They are the highest-consequence entries in the catalog and the least defended. See [Using agents](using-agents.md).
 
 `AGT-001` and `AGT-002` (you author what you submit, and you read it first) are unenforceable by construction. They are the premise the rest of the catalog rests on.

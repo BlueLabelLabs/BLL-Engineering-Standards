@@ -11,7 +11,6 @@ This covers engineering and product together. We run the same process, use the s
 | New to BlueLabel | [Day one](day-one.md) |
 | Looking up a specific rule | [The rules](rules/README.md) |
 | Starting or running a piece of work | How we build *(in progress)* |
-| An agent | `AGENTS.md` *(in progress)* |
 
 ## What's here
 
@@ -46,6 +45,8 @@ Everything else you read when you hit it. The lifecycle pages get read one stage
 Most of the technology rules are **generated** from our golden-path rule packs, the same source our agents read when they design and build. A change to the golden path opens a pull request here.
 
 The previous version of these standards went stale because nothing forced it to track reality. If a document says it is generated, do not hand-edit it. Change the pack.
+
+**Agents do not read this repository.** When you run `bluelabel init`, blueprint writes the rules into your project's own agent instruction file, so your agent applies them in the repository where the work is actually happening. Same rules, same source, delivered to the right place. This repository is the version people read.
 
 ## For more
 

@@ -24,7 +24,7 @@ Request these from a member of the Operations Team unless noted. Engagement-spec
 
 | What | Why you need it | Notes |
 | --- | --- | --- |
-| **GitHub**, BlueLabelLabs organization | All source code lives here | Client work never goes in a personal account ([OPS-001](../guidelines/README.md#ops--build-release-and-operations)) |
+| **GitHub**, BlueLabelLabs organization | All source code lives here | Client work never goes in a personal account ([SCM-001](../guidelines/README.md#scm--source-control)) |
 | **Passbolt** | The store of record for every credential you will be handed | Entries are named `BL###/Project/Credential` ([SEC-006](../guidelines/README.md#sec--security)) |
 | **blueprint** | Our agentic development methodology | [Repository](https://github.com/BlueLabelLabs/blueprint) (private) |
 | **Slack** | Where health alerts and engagement channels live | |

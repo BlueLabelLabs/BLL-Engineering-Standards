@@ -10,7 +10,7 @@ It covers working with AI agents too, because most of our code is now written th
 
 | | |
 | --- | --- |
-| [Guidelines](guidelines/README.md) | Every guideline, numbered, with what enforces it. This is the repository. |
+| [Guidelines](guidelines/README.md) | Every guideline, numbered and grouped by domain. This is the repository. |
 | [The golden path](golden-path/README.md) | What we build on, and why. Generated from our architecture rule packs. |
 | [Playbooks](playbooks/) | Procedures you follow with the page open. [Start here if you are new.](playbooks/getting-set-up.md) |
 

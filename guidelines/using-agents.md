@@ -10,7 +10,7 @@ last_reviewed: 2026-08-07
 
 This is about how we work with AI agents, not about the agentic systems we build for clients. Those are two subjects sharing a word. For what we build, see the [AI guidelines](README.md#ai--ai-and-agentic-systems).
 
-The [AGT guidelines](README.md#agt--working-with-agents) are terse by design. This page is the reasoning behind them, which matters more here than in other domains because most of them are enforced by nothing.
+The [AGT guidelines](README.md#agt--working-with-agents) are terse by design. This page is the reasoning behind them, which matters more here than elsewhere: these are guidelines no tool can check for you.
 
 Everyone directing an agent reads this, whichever side of the work they are on.
 
@@ -57,7 +57,7 @@ Read this part twice.
 
 **Client material the engagement agreement does not cover.** Check rather than assume. Some agreements are specific about which tools may process client data. ([AGT-009](README.md#agt--working-with-agents))
 
-Four guidelines, and **nothing enforces any of them.** No scanner catches a paste. No hook blocks a prompt. The catalog records them as unenforced because that is true, and pretending otherwise would be worse. They hold because you hold them.
+**Nothing catches a violation of any of these.** No scanner reads a prompt. No hook blocks a paste. They hold because you hold them, and saying so plainly is more use than pretending otherwise.
 
 Before pasting client material, ask what is actually in it. A transcript usually contains names, sometimes contact details, occasionally something said assuming it stayed in the room. A requirements document often contains the client's own customer data as examples. Strip what you do not need. You almost never need the names.
 

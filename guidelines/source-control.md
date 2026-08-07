@@ -29,16 +29,16 @@ The environments themselves are separate AWS accounts or Azure resource groups (
 ## Normal flow
 
 ```
-  feat/BL412-invite-flow ──PR──► develop ──PR──► staging ──PR──► main
+  feat/BL000-invite-flow ──PR──► develop ──PR──► staging ──PR──► main
                                     dev          staging         prod
 ```
 
 Cut a work branch from `develop`, named `<type>/BL###-<short-description>` ([SCM-004](README.md#scm--source-control)):
 
 ```
-feat/BL412-invite-flow
-fix/BL412-token-refresh
-chore/BL412-bump-deps
+feat/BL000-invite-flow
+fix/BL000-token-refresh
+chore/BL000-bump-deps
 ```
 
 Everything reaches a long-lived branch by pull request ([SCM-003](README.md#scm--source-control)). No exceptions for one-line changes, for urgency, or for work an agent produced. Promotion between environments is itself a pull request, which is what makes "what is in staging" answerable by looking rather than asking.
@@ -50,7 +50,7 @@ Code moves **upward only** ([SCM-005](README.md#scm--source-control)). Merging `
 The one case that runs the other way ([SCM-006](README.md#scm--source-control)):
 
 ```
-  main ──► hotfix/BL412-expired-token ──PR──► main
+  main ──► hotfix/BL000-expired-token ──PR──► main
                                                │
                                      back-merge ▼
                                         staging, develop

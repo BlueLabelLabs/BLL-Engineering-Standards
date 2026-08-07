@@ -195,7 +195,7 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 | SCM-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. |
 | SCM-002 | Every repository maintains three long-lived branches corresponding to the three environments: **`main`** (production), **`staging`**, and **`develop`** (development). |
 | SCM-003 | Nothing is pushed directly to a long-lived branch. **Every change arrives by pull request**, including a one-line fix and including work by an agent. |
-| SCM-004 | Work branches are cut from `develop` and named `<type>/BL###-<short-description>`, for example `feat/BL412-invite-flow` or `fix/BL412-token-refresh`. |
+| SCM-004 | Work branches are cut from `develop` and named `<type>/BL###-<short-description>`, for example `feat/BL000-invite-flow` or `fix/BL000-token-refresh`. |
 | SCM-005 | Code promotes **upward only**: `develop` → `staging` → `main`. A long-lived branch is never merged downward except as the back-merge required by SCM-006. |
 | SCM-006 | A hotfix branches from `main` and merges to `main` by pull request, then is **immediately back-merged** to `staging` and `develop`. A hotfix that is not back-merged is a regression scheduled for the next release. |
 | SCM-007 | Branch protection MUST be enabled on all three long-lived branches: pull request required, at least one approving review, required status checks passing, no force push, no branch deletion, and no self-approval. |

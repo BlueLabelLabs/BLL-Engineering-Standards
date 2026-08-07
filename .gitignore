@@ -1,0 +1,6 @@
+# Local tooling and internal notes. This repository is public.
+.claude/
+MAINTAINING.md
+
+# OS noise
+.DS_Store

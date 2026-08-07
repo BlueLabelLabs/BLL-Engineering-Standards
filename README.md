@@ -17,7 +17,7 @@ This covers engineering and product together. We run the same process, use the s
 | Section | What it answers |
 | --- | --- |
 | [Day one](day-one.md) | What you need access to, what you must read, and how to set up your machine. |
-| Working with agents *(in progress)* | The discipline that applies to everyone directing an agent, product and engineering alike. |
+| [How we use agents](using-agents/README.md) | The discipline that applies to everyone directing an agent, product and engineering alike. |
 | How we build *(in progress)* | One page per stage, from discovery through to operating what we shipped. What you produce, what good looks like, what gates it. |
 | [The rules](rules/README.md) | Every rule, numbered, with what enforces it. A reference, not reading material. |
 | The golden path *(in progress)* | What we build with, and why. The technology catalog. |

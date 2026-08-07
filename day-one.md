@@ -62,7 +62,7 @@ That does more than it looks like. It creates the `bluelabel/` project, generate
 
 ## 4. Read these two things
 
-**[Working with agents](working-with-agents/)** *(in progress)*. The discipline that applies to everyone directing an agent. Not optional, and not only for engineers.
+**[How we use agents](using-agents/README.md)**. The discipline that applies to everyone directing an agent. Not optional, and not only for engineers.
 
 **The rules for your side of the work.** Not all 113. Start with [AGT](rules/README.md#agt--working-with-agents), which applies to everyone, then the domains you will actually touch.
 

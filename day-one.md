@@ -20,7 +20,7 @@ If the policy and anything in this repository ever appear to conflict, the polic
 
 ## 2. Get your access
 
-Request these from a member of the Operations Team unless noted. Engagement-specific access comes from your Engagement Lead.
+Request these from a member of the Operations Team unless noted. Engagement-specific access comes from the Engineering Architect.
 
 | What | Why you need it | Notes |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ Request these from a member of the Operations Team unless noted. Engagement-spec
 | **blueprint** | Our agentic development methodology | [Repository](https://github.com/BlueLabelLabs/blueprint) (private) |
 | **Slack** | Where health alerts and engagement channels live | |
 | **Jira** | Engagement tracking, keyed by BL project code | |
-| **Cloud access** (AWS, Azure) | Per engagement, through SSO | Engineering Lead. AWS is always Identity Center, never access keys ([SEC-003](rules/README.md#sec--security), [SEC-005](rules/README.md#sec--security)) |
+| **Cloud access** (AWS, Azure) | Per engagement, through SSO | Engineering Architect. AWS is always Identity Center, never access keys ([SEC-003](rules/README.md#sec--security), [SEC-005](rules/README.md#sec--security)) |
 | **Vercel** | Only if you are building internal tools | ([INT-001](rules/README.md#int--internal-tools)) |
 | **MongoDB Atlas** | Only if your engagement uses Mongo | BlueLabel's managed account only ([DAT-014](rules/README.md#dat--data)) |
 
@@ -37,7 +37,7 @@ Two things worth knowing before you start collecting credentials.
 
 **Passbolt is where credentials live. Doppler is how one reaches you.** Doppler is for a one-time handoff of a secret to a person, and it is never a store of record. If you receive something through Doppler and it needs to persist, it belongs in Passbolt. ([SEC-007](rules/README.md#sec--security))
 
-**You will not be given long-lived cloud access keys**, and you should not create them. Human access to any cloud environment is SSO. If a third-party service genuinely supports nothing else, that is an exception requiring Engineering Lead approval, and it comes with conditions. ([SEC-005](rules/README.md#sec--security))
+**You will not be given long-lived cloud access keys**, and you should not create them. Human access to any cloud environment is SSO. If a third-party service genuinely supports nothing else, that is an exception requiring Engineering Architect approval, and it comes with conditions. ([SEC-005](rules/README.md#sec--security))
 
 ## 3. Set up your machine
 

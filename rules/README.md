@@ -41,7 +41,7 @@ The `Enforced by` column says what actually stops a violation. It is deliberatel
 
 Several checks marked `CI` do not exist yet. Building them is part of the scaffold work, not a separate project. Where a rule is marked `none`, that is a finding, not an oversight.
 
-Roles referenced below: **Engagement Lead**, **Engineering Lead**, **Operations Team**.
+Roles referenced below: **Engineering Architect**, **Operations Team**, and **Bobby Gill (Co-Founder)**.
 
 ## Domains
 
@@ -68,7 +68,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | AGT-001 | The person directing an agent is the **author** of its output, not its reviewer. | `new` | `none` |
 | AGT-002 | You MUST NOT submit work you have not read in full. | `new` | `none` |
 | AGT-003 | Agent-produced work is reviewed to the same standard as human-produced work. There is no lighter path. | `new` | `review` |
-| AGT-004 | All development work MUST run through blueprint. Where a client mandates their own process, the Engagement Lead MAY approve working within it, recorded in the engagement constitution. The exception covers **tooling only**: a written spec before implementation and a review gate before merge still apply. | `new` | `hook` |
+| AGT-004 | All development work MUST run through blueprint. Where a client mandates their own process, the Engineering Architect MAY approve working within it, recorded in the engagement constitution. The exception covers **tooling only**: a written spec before implementation and a review gate before merge still apply. | `new` | `hook` |
 | AGT-005 | The durable artifact is the spec, not the transcript. Requirements MUST live in the change's specs, not only in the prompt that produced them. | `new` | `hook` |
 | AGT-006 | Client secrets, credentials, and access tokens MUST NOT be placed in a prompt. | `new` | `none` |
 | AGT-007 | PII sent to a model MUST be minimized and redacted. Prefer synthetic or de-identified samples. | `pack` | `none` |
@@ -77,7 +77,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | AGT-010 | An agent MUST NOT, without explicit human authorization for that specific action: push to a default branch, force-push a shared branch, merge its own pull request, apply a destructive migration, change production infrastructure, read or rotate production secrets, publish or deploy, delete a branch or cloud resource, send anything to a client, or commit a credential. | `new` | `hook` + `branch` |
 | AGT-011 | Authorization is **per action**. Approving one action is not standing approval for that class of action. | `new` | `hook` |
 | AGT-012 | Meaningful agent contribution MUST be disclosed in commits and pull requests. | `new` | `review` |
-| AGT-013 | What we tell a client about AI involvement follows the engagement agreement. Where it is unwritten, the Engagement Lead decides. | `new` | `none` |
+| AGT-013 | What we tell a client about AI involvement follows the engagement agreement. Where it is unwritten, the answer comes from Bobby, not from the person being asked. | `new` | `none` |
 | AGT-014 | MCP servers MUST be reviewed before being connected to an engagement. An MCP server is arbitrary code with access to your session. | `new` | `config` |
 | AGT-015 | Agent configuration (permissions, hooks, skills) MUST live in the repository, not on individual machines. | `new` | `scaffold` |
 
@@ -89,7 +89,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | SEC-002 | Where the Information Security Policy and these standards conflict, **the policy governs**. | `new` | `none` |
 | SEC-003 | Human access to any cloud environment MUST use SSO: AWS Identity Center, or federation to the client's identity provider. | `new` | `config` |
 | SEC-004 | Workload access MUST use workload identity (IAM roles, Managed Identity). | `pack` | `review` |
-| SEC-005 | Long-lived cloud access keys MUST NOT be created. Where a third-party service supports no other authentication, an exception requires Engineering Lead approval and MUST use a dedicated least-privilege principal, be stored in Passbolt, be recorded on the engagement, and carry a stated rotation interval. | `new` | `config` |
+| SEC-005 | Long-lived cloud access keys MUST NOT be created. Where a third-party service supports no other authentication, an exception requires Engineering Architect approval and MUST use a dedicated least-privilege principal, be stored in Passbolt, be recorded on the engagement, and carry a stated rotation interval. | `new` | `config` |
 | SEC-006 | Passbolt is the store of record for human-held credentials. Entries follow `BL###/Project/Credential`. | `pack+` | `none` |
 | SEC-007 | Doppler MAY be used for one-time transport of a credential to a person. It is **not** a store of record. | `pack+` | `none` |
 | SEC-008 | Applications MUST read secrets at runtime from the cloud secrets manager (Key Vault, AWS Secrets Manager). | `pack` | `review` |
@@ -172,7 +172,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 
 | ID | Rule | Src | Enforced by |
 | --- | --- | --- | --- |
-| OPS-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engagement Lead MAY approve it, recorded in the engagement constitution. | `new` | `config` |
+| OPS-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. | `new` | `config` |
 | OPS-002 | At engagement close, repositories transfer to the client. | `new` | `none` |
 | OPS-003 | Every named artifact MUST be prefixed with its BL project code: repositories, Vercel projects, cloud accounts and resource groups, storage buckets, Passbolt entries. Machine names use lowercase `bl###-<slug>`. Jira, Passbolt paths, and prose use uppercase `BL###`. Use `blxxx-` until a code is assigned, then rename. | `new` | `review` |
 | OPS-004 | All infrastructure we create in a client cloud MUST be provisioned as code. Terraform, Bicep, and CDK are all acceptable. Use **one tool per environment**; do not mix. | `pack+` | `review` |

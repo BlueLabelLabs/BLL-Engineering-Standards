@@ -60,13 +60,21 @@ Branch from `main`, merge to `main` by pull request, then **immediately back-mer
 
 The back-merge is the part that gets skipped, and skipping it is how a fixed bug returns. The fix exists only on `main`, the next promotion from `staging` carries the old code forward, and production regresses to the bug you already fixed. If you take one thing from this page, take this.
 
-## Build once, promote the artifact
+## Each branch deploys its environment
 
-The environments do not each build from their own branch ([SCM-009](README.md#scm--source-control)). One artifact is built, deployed to staging, tested there, and that same artifact is what reaches production.
+CI/CD builds and deploys each environment from its own branch ([SCM-009](README.md#scm--source-control)):
 
-This is the guideline that makes environment branches safe. Rebuilding per environment means the thing you tested and the thing you shipped are two different builds that happen to come from similar source, and every difference between them is a place a release can fail for reasons no test could have caught.
+| Merge into | Deploys to |
+| --- | --- |
+| `develop` | Development |
+| `staging` | Staging |
+| `main` | Production |
 
-Branches track what code is where. They are not build triggers.
+A merge into a long-lived branch is the deployment trigger. There is no separate deploy step to remember, and no way to ship something that did not go through a pull request.
+
+Continuous integration and deployment are mandatory, and they run on GitHub Actions unless a client requires their own pipeline ([OPS-019](README.md#ops--build-release-and-operations), [OPS-020](README.md#ops--build-release-and-operations)). Nothing is built or deployed by hand from an engineer's machine.
+
+Because each environment builds from its own branch, **keeping the branches in step is what keeps the environments comparable**. That is the real reason SCM-005 and SCM-006 matter: a `staging` branch that has drifted from `develop`, or a hotfix that never came back down, means you are testing something other than what you are about to ship.
 
 ## Branch protection
 

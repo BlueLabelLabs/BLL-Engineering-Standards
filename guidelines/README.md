@@ -164,6 +164,8 @@ Applies to everyone who directs an agent, product and engineering alike.
 | OPS-016 | Every service emits structured logs and is traceable across requests. |
 | OPS-017 | Everything we build ships with health monitoring that detects degradation and alerts to BlueLabel's Slack channels. |
 | OPS-018 | Configuration that differs by environment is externalized, not hard-coded. |
+| OPS-019 | Every project MUST have continuous integration and continuous deployment. Builds and deployments MUST NOT be run by hand from an engineer's machine. |
+| OPS-020 | CI/CD runs on **GitHub Actions**. Use a client's own pipeline only where the client requires it. |
 
 ## SCM — Source control
 
@@ -179,7 +181,7 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 | SCM-006 | A hotfix branches from `main` and merges to `main` by pull request, then is **immediately back-merged** to `staging` and `develop`. A hotfix that is not back-merged is a regression scheduled for the next release. |
 | SCM-007 | Branch protection MUST be enabled on all three long-lived branches: pull request required, at least one approving review, required status checks passing, no force push, no branch deletion, and no self-approval. |
 | SCM-008 | A pull request is approved by someone other than its author. Nobody merges their own pull request, and neither does an agent. |
-| SCM-009 | The artifact tested in staging is the artifact deployed to production. Environments do not each rebuild from their own branch. |
+| SCM-009 | Each environment is built and deployed by CI/CD **from its corresponding branch**. A merge into `develop`, `staging`, or `main` is what deploys that environment. |
 
 ## QUA — Quality
 

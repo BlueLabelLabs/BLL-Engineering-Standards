@@ -87,4 +87,4 @@ Review an MCP server before connecting it to an engagement. An MCP server is arb
 
 Worth saying plainly, because it gets lost in conversations about speed. The quality bar is the same. Tests, review, security, and architecture discipline all apply unchanged. Agents change how much we can build in a week. They do not change what we are willing to put in front of a client.
 
-Next: [Reviewing agent-written code](reviewing-agent-code.md).
+Next: [Code review](code-review.md), which covers what to check and how agent-written code fails.

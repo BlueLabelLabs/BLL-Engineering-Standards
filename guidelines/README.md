@@ -16,7 +16,7 @@ These cover what must be true of the software and how we build it. They say noth
 
 Cite the ID in a review comment or an agent instruction. A guideline lives here and nowhere else, so there is never a second version to drift. IDs are stable, and a retired guideline's ID is never reused.
 
-Two companion pages carry reasoning where a one-line guideline is not enough: [Using agents](using-agents.md) and [Reviewing agent-written code](reviewing-agent-code.md). There is no page per domain, and most domains do not need one.
+Two companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, and [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand. There is no page per domain, and most domains do not need one.
 
 Roles referenced below: **Engineering Architect** and **Operations Team**.
 

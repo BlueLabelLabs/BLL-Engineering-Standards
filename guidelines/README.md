@@ -16,7 +16,7 @@ These cover what must be true of the software and how we build it. They say noth
 
 Cite the ID in a review comment or an agent instruction. A guideline lives here and nowhere else, so there is never a second version to drift. IDs are stable, and a retired guideline's ID is never reused.
 
-Four companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand, [Source control](source-control.md), and [Alerting](alerting.md). There is no page per domain, and most domains do not need one.
+Five companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand, [Source control](source-control.md), [Testing](testing.md), and [Alerting](alerting.md). There is no page per domain, and most domains do not need one.
 
 Roles referenced below: **Engineering Architect** and **Operations Team**.
 
@@ -193,7 +193,7 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 
 | ID | Guideline |
 | --- | --- |
-| QUA-001 | Projects carry both unit and integration test coverage throughout. |
+| QUA-001 | Projects carry **both** unit and integration tests throughout. Neither substitutes for the other. |
 | QUA-002 | New behavior ships with tests. |
 | QUA-003 | A bug fix includes a test that fails without the fix. |
 | QUA-004 | Tests run in CI on every pull request and block the merge on failure. |
@@ -203,6 +203,10 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 | QUA-008 | Warnings are resolved before committing, not deferred. |
 | QUA-009 | CI runs a dependency vulnerability scan and a secret scan on the diff. |
 | QUA-010 | Formatting MUST NOT be a review topic. If a human is commenting on spacing, the formatter is missing. |
+| QUA-011 | Any project with a user interface MUST have automated UI tests. **Playwright** is the framework. |
+| QUA-012 | When developing with an agent, UI tests are authored and exercised through the **Playwright MCP server**, so the agent runs what it writes rather than assuming it works. |
+| QUA-013 | Complete end-to-end journeys MUST be verified through a **real browser against a running environment**, driven by Claude Code's Chrome integration. |
+| QUA-014 | A flaky test is **fixed or deleted**. Retrying until green is not a fix, and a suite that needs retries to pass is not telling you anything. |
 
 ## INT — Internal tools
 

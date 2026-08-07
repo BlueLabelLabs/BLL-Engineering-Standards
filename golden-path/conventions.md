@@ -24,6 +24,12 @@ Engineering conventions for web frontends. These sit **below the architecture ba
 - Data fetching / server state: **TanStack Query**.
 - Build tooling (React SPA): **Vite**. (Next.js uses its own toolchain.)
 
+## Testing
+- UI tests: **Playwright**.
+- When developing with an agent, author and exercise UI tests through the **Playwright MCP** server — the agent runs what it writes rather than assuming it works.
+- Complete end-to-end journeys are verified through a **real browser against a running environment**, driven by **Claude Code's Chrome integration**. That is a development and pre-release check, not a CI step; the Playwright suite is what runs in CI.
+- A flaky test is fixed or deleted. Retrying until green is not a fix.
+
 ## Mobile (React Native) standards
 
 Engineering conventions for mobile clients. These sit **below the architecture barrier** — applied when building. The architectural choices (framework, distribution, the required integrations) live in the `workload/mobile` pack.

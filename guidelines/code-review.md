@@ -141,6 +141,9 @@ Most of this domain is enforced by branch protection, so it never reaches a revi
 | --- | --- |
 | [QUA-001](README.md#qua--quality) | Both unit and integration coverage, not one standing in for the other |
 | [QUA-005](README.md#qua--quality) | No dependency on a shared or long-lived environment |
+| [QUA-011](README.md#qua--quality) | A user interface has automated Playwright tests |
+| [QUA-013](README.md#qua--quality) | The complete journey was walked in a real browser, not just unit-tested |
+| [QUA-014](README.md#qua--quality) | No flaky tests papered over with retries |
 
 ### Internal tools
 

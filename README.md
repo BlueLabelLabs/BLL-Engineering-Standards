@@ -14,7 +14,7 @@ It covers working with AI agents too, because most of our code is now written th
 | [The golden path](golden-path/README.md) | What we build on, and why. Generated from our architecture rule packs. |
 | [Playbooks](playbooks/) | Procedures you follow with the page open. [Start here if you are new.](playbooks/getting-set-up.md) |
 
-Two companion pages carry what a one-line guideline cannot: [Using agents](guidelines/using-agents.md), which everyone reads, and [Code review](guidelines/code-review.md), which enumerates the guidelines a reviewer has to check by hand and can be handed to an agent to drive a review.
+Three companion pages carry what a one-line guideline cannot: [Using agents](guidelines/using-agents.md), which everyone reads, [Code review](guidelines/code-review.md), which enumerates the guidelines a reviewer has to check by hand and can be handed to an agent to drive a review, and [Source control](guidelines/source-control.md), the branching model.
 
 ## How to read a guideline
 

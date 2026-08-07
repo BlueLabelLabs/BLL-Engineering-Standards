@@ -121,6 +121,15 @@ A change that crosses one of these is architectural, and it needed a decision be
 | [OPS-016](README.md#ops--build-release-and-operations) | Structured logs, traceable across requests |
 | [OPS-018](README.md#ops--build-release-and-operations) | Environment-specific configuration externalized |
 
+### Source control
+
+Most of this domain is enforced by branch protection, so it never reaches a reviewer. Two things still need eyes:
+
+| | |
+| --- | --- |
+| [SCM-004](README.md#scm--source-control) | Work branch cut from `develop` and named `<type>/BL###-<description>` |
+| [SCM-006](README.md#scm--source-control) | A hotfix merged to `main` is back-merged to `staging` and `develop`. Skipping this is how a fixed bug comes back |
+
 ### Tests
 
 | | |

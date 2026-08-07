@@ -16,7 +16,7 @@ These cover what must be true of the software and how we build it. They say noth
 
 Cite the ID in a review comment or an agent instruction. A guideline lives here and nowhere else, so there is never a second version to drift. IDs are stable, and a retired guideline's ID is never reused.
 
-Two companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, and [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand. There is no page per domain, and most domains do not need one.
+Three companion pages carry what a one-line guideline cannot: [Using agents](using-agents.md), which everyone reads, [Code review](code-review.md), which enumerates the guidelines a reviewer has to check by hand, and [Source control](source-control.md), because a branching model is easier to show than to list. There is no page per domain, and most domains do not need one.
 
 Roles referenced below: **Engineering Architect** and **Operations Team**.
 
@@ -31,6 +31,7 @@ Roles referenced below: **Engineering Architect** and **Operations Team**.
 | [`DAT`](#dat--data) | Data |
 | [`AI`](#ai--ai-and-agentic-systems) | AI and agentic systems |
 | [`OPS`](#ops--build-release-and-operations) | Build, release, and operations |
+| [`SCM`](#scm--source-control) | Source control |
 | [`QUA`](#qua--quality) | Quality |
 | [`INT`](#int--internal-tools) | Internal tools |
 
@@ -148,7 +149,6 @@ Applies to everyone who directs an agent, product and engineering alike.
 
 | ID | Guideline |
 | --- | --- |
-| OPS-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. |
 | OPS-003 | Every named artifact MUST be prefixed with its BL project code: repositories, Vercel projects, cloud accounts and resource groups, storage buckets, Passbolt entries. Machine names use lowercase `bl###-<slug>`. Jira, Passbolt paths, and prose use uppercase `BL###`. Use `blxxx-` until a code is assigned, then rename. |
 | OPS-004 | All infrastructure we create in a client cloud MUST be provisioned as code. Terraform, Bicep, and CDK are all acceptable. Use **one tool per environment**; do not mix. |
 | OPS-005 | Where we inherit an existing cloud environment, OPS-004 applies to resources **we** create. We do not retrofit what was already there. |
@@ -164,6 +164,22 @@ Applies to everyone who directs an agent, product and engineering alike.
 | OPS-016 | Every service emits structured logs and is traceable across requests. |
 | OPS-017 | Everything we build ships with health monitoring that detects degradation and alerts to BlueLabel's Slack channels. |
 | OPS-018 | Configuration that differs by environment is externalized, not hard-coded. |
+
+## SCM — Source control
+
+Most of this domain is enforced by branch protection rather than by anyone remembering it. See [Source control](source-control.md) for the branching model and the protection settings.
+
+| ID | Guideline |
+| --- | --- |
+| SCM-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. |
+| SCM-002 | Every repository maintains three long-lived branches corresponding to the three environments: **`main`** (production), **`staging`**, and **`develop`** (development). |
+| SCM-003 | Nothing is pushed directly to a long-lived branch. **Every change arrives by pull request**, including a one-line fix and including work by an agent. |
+| SCM-004 | Work branches are cut from `develop` and named `<type>/BL###-<short-description>`, for example `feat/BL412-invite-flow` or `fix/BL412-token-refresh`. |
+| SCM-005 | Code promotes **upward only**: `develop` → `staging` → `main`. A long-lived branch is never merged downward except as the back-merge required by SCM-006. |
+| SCM-006 | A hotfix branches from `main` and merges to `main` by pull request, then is **immediately back-merged** to `staging` and `develop`. A hotfix that is not back-merged is a regression scheduled for the next release. |
+| SCM-007 | Branch protection MUST be enabled on all three long-lived branches: pull request required, at least one approving review, required status checks passing, no force push, no branch deletion, and no self-approval. |
+| SCM-008 | A pull request is approved by someone other than its author. Nobody merges their own pull request, and neither does an agent. |
+| SCM-009 | The artifact tested in staging is the artifact deployed to production. Environments do not each rebuild from their own branch. |
 
 ## QUA — Quality
 

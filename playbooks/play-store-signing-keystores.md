@@ -1,3 +1,11 @@
+---
+title: Play Store Signing Keystores
+status: current
+version: 1.0
+owner: Bobby Gill
+last_reviewed: 2026-08-07
+---
+
 ### Process for Securely Managing Play Store Signing Keystore
 
 ##### Overview: The Engineering Manager is responsible for creating the App Signing Keystore and sharing it with the Developers using the following process:  

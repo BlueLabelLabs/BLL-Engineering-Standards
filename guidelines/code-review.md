@@ -47,6 +47,7 @@ Work only the sections the change touches.
 | [ARC-003](README.md#arc--architecture) | Any deviation from the golden path is recorded with a reason, not silent |
 | [QUA-002](README.md#qua--quality) | New behavior ships with tests |
 | [QUA-003](README.md#qua--quality) | A bug fix includes a test that fails without the fix |
+| [QUA-015](README.md#qua--quality) | New dependencies came from the package manager, nothing vendored |
 
 ### Endpoints and APIs
 
@@ -62,6 +63,9 @@ The first five are the ones we get wrong most often, in human and agent code ali
 | [API-006](README.md#api--interfaces-and-contracts) | No HTTP 200 on an error |
 | [API-013](README.md#api--interfaces-and-contracts) | Long-running work on a durable queue, never in the request path |
 | [SEC-014](README.md#sec--security) | TLS and authentication on every endpoint, health excepted |
+| [API-015](README.md#api--interfaces-and-contracts) | No `GET` that creates, modifies, or deletes |
+| [API-016](README.md#api--interfaces-and-contracts) | Rate limits on anything third-party or public |
+| [API-017](README.md#api--interfaces-and-contracts) | The client shows its own message, not raw server error text |
 
 "Does this work" and "is this authorized" look identical in a happy-path test. An endpoint can be correct for the person testing it and open to everyone else.
 
@@ -78,6 +82,8 @@ The first five are the ones we get wrong most often, in human and agent code ali
 | [DAT-015](README.md#dat--data) | Datetimes stored in UTC, never naive or local |
 | [DAT-016](README.md#dat--data) | A date without a time is a date, not a timestamp |
 | [DAT-017](README.md#dat--data) | Local time stored as an IANA identifier, not a fixed offset |
+| [DAT-018](README.md#dat--data) | Files go to object storage, never the app server's filesystem |
+| [DAT-019](README.md#dat--data) | Normalized, unless denormalization has a recorded reason |
 
 ### Secrets and identity
 
@@ -86,6 +92,7 @@ The first five are the ones we get wrong most often, in human and agent code ali
 | [SEC-004](README.md#sec--security) | Workload identity, not embedded credentials |
 | [SEC-008](README.md#sec--security) | Secrets read at runtime from the cloud secrets manager |
 | [SEC-015](README.md#sec--security) | No password storage; bcrypt with a unique salt if unavoidable |
+| [SEC-016](README.md#sec--security) | Tokens in the secure store, never `localStorage` or `UserDefaults` |
 
 ### Architecture boundaries
 

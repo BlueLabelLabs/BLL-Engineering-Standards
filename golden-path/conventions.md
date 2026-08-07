@@ -61,6 +61,9 @@ Engineering conventions for backend services. These sit **below the architecture
 
 Engineering conventions for relational databases (**PostgreSQL** and **SQL Server**). These sit **below the architecture barrier** — they are data-modeling and build-time standards, not architecture decisions the architect chooses during the design walk. They are applied when *building*. The one genuinely architectural rule — **auditability** — lives as an invariant in `universal-baseline`.
 
+## Modeling
+- **Normalize by default.** Denormalize only for a specific performance or concurrency reason, recorded with the decision.
+
 ## Keys & columns
 - Primary keys: **BIGINT identity / auto-increment** surrogate keys.
 - Naming: **snake_case**; table names **singular**.

@@ -77,6 +77,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | SEC-013 | Datastores are never publicly exposed. Access is network-restricted or private. |
 | SEC-014 | Every endpoint uses TLS and requires authentication, independent of network topology. Health endpoints excepted. |
 | SEC-015 | We do not store passwords. Where an engagement leaves no alternative, hash with bcrypt using a unique per-password salt. |
+| SEC-016 | Access tokens and credentials MUST be stored in the platform's secure store, such as the OS keychain or keystore on a device. They MUST NOT be persisted in plain client storage (`UserDefaults`, `localStorage`, `sessionStorage`). |
 
 ## ARC — Architecture
 
@@ -110,6 +111,9 @@ Applies to everyone who directs an agent, product and engineering alike.
 | API-012 | All datetimes cross the API boundary in UTC, inbound and outbound, formatted as **ISO 8601 with an explicit offset** (`2026-08-07T14:30:00Z`). |
 | API-013 | Background and long-running work MUST go to a durable queue and a serverless processor. Never the request path. |
 | API-014 | A project that exposes an API also scaffolds a companion MCP server using the same authentication provider. |
+| API-015 | **`GET` is safe.** A `GET` request MUST NOT create, modify, or delete state. State changes use `POST`, `PUT`, `PATCH`, or `DELETE`. |
+| API-016 | Any API exposed to a third party or to the public internet MUST enforce **rate limits** and MUST authenticate its callers. |
+| API-017 | A client MUST NOT display a raw server error message to a user. The client maps the returned error code to its own message. Server error text is for logs and developers. |
 
 ## DAT — Data
 
@@ -132,6 +136,8 @@ Applies to everyone who directs an agent, product and engineering alike.
 | DAT-015 | Datetimes are stored in **UTC**. Naive or local timestamps MUST NOT be stored. |
 | DAT-016 | A value that is a date without a time (a birth date, an invoice date) is stored as a **date**, not a timestamp. |
 | DAT-017 | Where local time matters to the user, the **IANA timezone identifier** (`America/New_York`) is stored alongside the UTC value. A fixed UTC offset MUST NOT be stored in its place, because offsets change with daylight saving and legislation. |
+| DAT-018 | Uploads and generated files MUST be written to object storage, never to the application server's filesystem. |
+| DAT-019 | Data structures are **normalized by default**. Denormalize only for a specific performance or concurrency reason, recorded with the decision. |
 
 ## AI — AI and agentic systems
 
@@ -214,6 +220,7 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 | QUA-012 | When developing with an agent, UI tests are authored and exercised through the **Playwright MCP server**, so the agent runs what it writes rather than assuming it works. |
 | QUA-013 | Complete end-to-end journeys MUST be verified through a **real browser against a running environment**, driven by Claude Code's Chrome integration. |
 | QUA-014 | A flaky test is **fixed or deleted**. Retrying until green is not a fix, and a suite that needs retries to pass is not telling you anything. |
+| QUA-015 | Dependencies MUST be added through the language's package manager. Library source MUST NOT be copied into the repository, and binaries MUST NOT be vendored. |
 
 ## INT — Internal tools
 

@@ -16,7 +16,7 @@ The catalog is deliberately terse. Two companion pages carry reasoning where a o
 
 ## How to read
 
-**MUST / MUST NOT** is a hard rule. Deviating requires a recorded exception per [GOVERNANCE.md](../GOVERNANCE.md). **SHOULD / SHOULD NOT** is our default; deviating is allowed with a written reason. **MAY** is genuinely optional.
+**MUST / MUST NOT** is a hard rule. Deviating requires a reason recorded on the engagement ([ARC-003](#arc--architecture)). **SHOULD / SHOULD NOT** is our default; deviating is allowed with a written reason. **MAY** is genuinely optional.
 
 The `Src` column says where a rule comes from and how it gets maintained:
 

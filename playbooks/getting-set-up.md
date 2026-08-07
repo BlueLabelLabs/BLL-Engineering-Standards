@@ -65,7 +65,7 @@ That does more than it looks like. It creates the `bluelabel/` project, generate
 Ask the **Engineering Architect**, or Bobby. That is the route for anything you cannot resolve from this repository:
 
 - **Is this allowed on this engagement?**
-- **Should this rule apply here?** Deviating is fine. Deviating quietly is not. ([GOVERNANCE.md](../GOVERNANCE.md))
+- **Should this guideline apply here?** Deviating is fine. Deviating quietly is not ([ARC-003](../guidelines/README.md#arc--architecture)).
 - **Can I put this in a prompt?** If you have to ask, the answer is no until someone says otherwise.
 
 The last one is worth internalizing. Most of what we do is recoverable. Client data leaving our control is not.

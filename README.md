@@ -13,7 +13,6 @@ It covers working with AI agents too, because most of our code is now written th
 | [Guidelines](guidelines/README.md) | Every guideline, numbered, with what enforces it. This is the repository. |
 | [The golden path](golden-path/README.md) | What we build on, and why. Generated from our architecture rule packs. |
 | [Playbooks](playbooks/) | Procedures you follow with the page open. [Start here if you are new.](playbooks/getting-set-up.md) |
-| [Governance](GOVERNANCE.md) | How a guideline changes, how to deviate from one, who owns what. |
 
 Two companion pages carry reasoning where a one-line guideline is not enough: [Using agents](guidelines/using-agents.md), which everyone reads, and [Reviewing agent-written code](guidelines/reviewing-agent-code.md).
 
@@ -25,7 +24,7 @@ Guidelines are numbered and live in exactly one place. Nothing restates them, so
 
 Cite the ID. "This doesn't satisfy API-008" is a better review comment than a paragraph, and it gives the author somewhere to go.
 
-Deviating is expected. Every engagement has a constraint the golden path did not anticipate. Deviating **silently** is the problem, because it costs us the visibility the guideline was buying. [GOVERNANCE.md](GOVERNANCE.md) covers how to record one.
+Deviating is expected. Every engagement has a constraint the golden path did not anticipate. Deviating **silently** is the problem, because it costs us the visibility the guideline was buying. Record the deviation and the reason on the engagement ([ARC-003](guidelines/README.md#arc--architecture)).
 
 The catalog is a reference, not reading material. Reading 110 numbered guidelines end to end is a good way to retain none of them. The value is finding one in five seconds when someone cites it.
 

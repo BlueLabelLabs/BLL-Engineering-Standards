@@ -25,7 +25,7 @@ the defaults we reach for, and how to choose when they do not settle it.
 - Image detection / computer vision: **YOLO** as the starting point.
 - Classical / tabular ML: **scikit-learn** and **XGBoost**.
 - Pretrained models: pull from **HuggingFace**.
-- Experiment tracking, pipelines, and model registry: **MLflow**.
+- Experiment tracking, pipelines, and model registry: **MLflow**, on a BlueLabel self-hosted instance.
 - Data labeling: **Label Studio** on a BlueLabel self-hosted instance.
 - Inference hosting: **Amazon SageMaker** (AWS) / **Azure ML** (Azure) — real-time endpoints.
 - Training compute: local or cloud GPU.

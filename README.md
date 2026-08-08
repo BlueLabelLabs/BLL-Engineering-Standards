@@ -13,6 +13,7 @@ It covers working with AI agents too, because most of our code is now written th
 | [Guidelines](guidelines/README.md) | Every guideline, numbered and grouped by domain. This is the repository. |
 | [The golden path](golden-path/README.md) | What we build on, and why. Generated from our architecture rule packs. |
 | [Getting set up](playbooks/getting-set-up.md) | Access, machine setup, and what to read before you touch client work. Start here if you are new. |
+| [Engineering tools](playbooks/tools.md) | What we hold an account for, what each is for, and how to get access. |
 
 Five companion pages carry what a one-line guideline cannot: [Using agents](guidelines/using-agents.md), which everyone reads, [Code review](guidelines/code-review.md), which enumerates the guidelines a reviewer has to check by hand and can be handed to an agent to drive a review, [Source control](guidelines/source-control.md), [Testing](guidelines/testing.md), and [Alerting](guidelines/alerting.md).
 

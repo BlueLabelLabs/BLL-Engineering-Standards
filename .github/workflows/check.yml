@@ -1,0 +1,33 @@
+name: Check
+
+# Guidelines are cited by ID in reviews and exception records, so a reference
+# that no longer resolves is a broken promise rather than a typo. This runs on
+# every pull request, including the ones the sync workflow opens.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  references:
+    name: References
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node builtins only; there is nothing to install.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check guideline IDs, anchors, and links
+        run: node .github/scripts/check-references.mjs .

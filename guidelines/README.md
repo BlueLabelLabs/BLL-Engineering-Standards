@@ -156,7 +156,7 @@ Applies to everyone who directs an agent, product and engineering alike.
 | AI-009 | Experiments are reproducible and tracked: versioned notebooks, prompts, and datasets. |
 | AI-010 | An experimentation workstream has an explicit hypothesis, success criteria, and decision gate defined before it starts. |
 | AI-011 | Every LLM feature MUST have an automated evaluation suite run against a **golden ground-truth dataset**: representative inputs with their known-good outputs, versioned in the repository alongside the code. |
-| AI-012 | Eval suites MUST NOT run on every push. They run **on demand**, and automatically on merge to a long-lived branch (`development`, `sandbox`, `staging`, `master`). This is a deliberate exception to [QUA-004](#qua--quality). |
+| AI-012 | Eval suites MUST NOT run on every push. They run **on demand**, and automatically on merge to a long-lived branch (`development`, `sandbox`, `staging`, `main`). This is a deliberate exception to [QUA-004](#qua--quality). |
 | AI-013 | The golden dataset is maintained as the system changes. New capabilities add cases, and **every regression found in production adds a case**. |
 | AI-014 | Eval results MUST be recorded and comparable across runs, so the effect of a change on answer quality is visible rather than asserted. |
 
@@ -195,14 +195,14 @@ Most of this domain is enforced by branch protection rather than by anyone remem
 | ID | Guideline |
 | --- | --- |
 | SCM-001 | All source code MUST be hosted on GitHub in the **BlueLabelLabs** organization. Client work MUST NOT live in personal accounts, other Git hosts, or local-only repositories. Where a client mandates their own organization or host, the Engineering Architect MAY approve it, recorded in the engagement constitution. |
-| SCM-002 | Every repository maintains four long-lived branches: **`development`** (top of stream, no environment), **`sandbox`**, **`staging`**, and **`master`**. `sandbox`, `staging`, and `master` correspond to the three environments. |
+| SCM-002 | Every repository maintains four long-lived branches: **`development`** (top of stream, no environment), **`sandbox`**, **`staging`**, and **`main`**. `sandbox`, `staging`, and `main` correspond to the three environments. |
 | SCM-003 | Nothing is pushed directly to a long-lived branch. **Every change arrives by pull request**, including a one-line fix, a promotion between branches, and work done by an agent. |
 | SCM-004 | Work branches are cut from `development` and named `<type>/BL###-<short-description>`, for example `feat/BL000-invite-flow` or `fix/BL000-token-refresh`. Branch names are lowercase. |
-| SCM-005 | Code flows **downstream**: `development` → `sandbox` → `staging` → `master`. Code moving the other way, back toward a feature branch, is moving **upstream**. |
-| SCM-006 | A hotfix branches from `master` and merges to `master` by pull request, then is **immediately pulled back upstream** to `staging`, `sandbox`, and `development`. A hotfix that is not pulled back upstream is a regression scheduled for the next release. |
+| SCM-005 | Code flows **downstream**: `development` → `sandbox` → `staging` → `main`. Code moving the other way, back toward a feature branch, is moving **upstream**. |
+| SCM-006 | A hotfix branches from `main` and merges to `main` by pull request, then is **immediately pulled back upstream** to `staging`, `sandbox`, and `development`. A hotfix that is not pulled back upstream is a regression scheduled for the next release. |
 | SCM-007 | Branch protection MUST be enabled on all four long-lived branches: pull request required, at least one approving review, required status checks passing, no force push, no branch deletion, and no self-approval. |
 | SCM-008 | A pull request is approved by someone other than its author. Nobody merges their own pull request, and neither does an agent. |
-| SCM-009 | Each environment is built and deployed by CI/CD **from its corresponding branch**: `sandbox` → development, `staging` → staging, `master` → production. `development` deploys nothing; it exists so a review session's worth of merged work promotes as one deployment rather than ten. |
+| SCM-009 | Each environment is built and deployed by CI/CD **from its corresponding branch**: `sandbox` → development, `staging` → staging, `main` → production. `development` deploys nothing; it exists so a review session's worth of merged work promotes as one deployment rather than ten. |
 | SCM-010 | A pull request title MUST be descriptive and MUST contain a link to its JIRA issue in bracket notation. The title becomes the commit message, so it is the thing someone reads in the log a year later. |
 | SCM-011 | Pull requests are **squashed on merge**, so one pull request becomes one commit. The exception is an **upstream pull**, which merges without squashing so the original commit hashes survive and can be matched against the branch they came from. |
 | SCM-012 | Do not rebase. Its genuine use cases are rare, and what is usually meant is a cross-branch pull. |

@@ -15,8 +15,8 @@ Almost all of it is enforced by branch protection rather than by anyone remember
 ## Four branches
 
 ```
-  feat/BL000-invite-flow ──► development ──► sandbox ──► staging ──► master
-                             (no env)          dev        staging      prod
+  feat/BL000-invite-flow ──► development ──► sandbox ──► staging ──► main
+                             (no env)          dev        staging     prod
 ```
 
 | Branch | Deploys to | Identifier |
@@ -24,17 +24,19 @@ Almost all of it is enforced by branch protection rather than by anyone remember
 | `development` | nothing | — |
 | `sandbox` | Development | `dev` |
 | `staging` | Staging | `staging` |
-| `master` | Production | `prod` |
+| `main` | Production | `prod` |
 
 **`development` is the top of stream and the real source of truth** ([SCM-002](README.md#scm--source-control)). Every work branch is cut from it and every pull request merges back into it. It deploys nothing, and that is the point: a review session might merge ten pull requests, and on a large codebase ten deploys is an hour of transpiling for no benefit. Batch them and promote once.
 
-Which makes `sandbox`, `staging`, and `master` doorways to their environments rather than places work happens.
+Which makes `sandbox`, `staging`, and `main` doorways to their environments rather than places work happens.
 
-The branch names and the environment identifiers deliberately differ. `master` is the branch, `prod` is the string in a resource name, and `sandbox` is the branch whose environment is identified as `dev`. Forcing either side to match the other buys nothing and would break resource naming already in use.
+The branch names and the environment identifiers deliberately differ. `main` is the branch, `prod` is the string in a resource name, and `sandbox` is the branch whose environment is identified as `dev`. Forcing either side to match the other buys nothing and would break resource naming already in use.
+
+**New repositories use `main`.** A repository already on `master` is not required to rename; the cost lands on every clone, every pipeline, and every protection rule, and it buys consistency rather than correctness. Rename when something else is already touching the pipeline.
 
 ## Downstream and upstream
 
-Water flows down the stream. New code starts at the top and flows **downstream** to `master` and into production. Anything moving the other way, a hotfix heading back toward the feature branches, is moving **upstream** ([SCM-005](README.md#scm--source-control)).
+Water flows down the stream. New code starts at the top and flows **downstream** to `main` and into production. Anything moving the other way, a hotfix heading back toward the feature branches, is moving **upstream** ([SCM-005](README.md#scm--source-control)).
 
 Worth saying plainly, because the intuition runs backwards for some people: promoting toward production is *down*, not up.
 
@@ -65,21 +67,21 @@ That distinction matters more than it looks. When `sandbox` and `development` co
 The one flow that runs upstream ([SCM-006](README.md#scm--source-control)):
 
 ```
-  master ──► hotfix/BL000-expired-token ──PR──► master
+  main ──► hotfix/BL000-expired-token ──PR──► main
                                                   │
                                     pull upstream  ▼
                                    staging, sandbox, development
 ```
 
-Branch from `master`, merge to `master` by pull request, then **immediately pull it back upstream** through `staging`, `sandbox`, and `development`.
+Branch from `main`, merge to `main` by pull request, then **immediately pull it back upstream** through `staging`, `sandbox`, and `development`.
 
 The upstream pull is itself a pull request, so it gets reviewed, and it merges **without squashing** ([SCM-011](README.md#scm--source-control)) so the original hash survives. That is the whole trick: the same hash existing upstream is something a reviewer verifies at a glance, where a squashed equivalent has to be read and compared.
 
-**The upstream pull is the step that gets skipped, and skipping it is how a fixed bug comes back.** The fix exists only on `master`, the next promotion carries the old code forward over the top of it, and production regresses to the bug you already paid to fix. If you take one thing from this page, take this.
+**The upstream pull is the step that gets skipped, and skipping it is how a fixed bug comes back.** The fix exists only on `main`, the next promotion carries the old code forward over the top of it, and production regresses to the bug you already paid to fix. If you take one thing from this page, take this.
 
 ## Branch protection
 
-Enable on `development`, `sandbox`, `staging`, and `master` ([SCM-007](README.md#scm--source-control)):
+Enable on `development`, `sandbox`, `staging`, and `main` ([SCM-007](README.md#scm--source-control)):
 
 - Require a pull request before merging
 - Require at least one approving review

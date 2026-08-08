@@ -1,39 +1,48 @@
 ---
 title: Source Control
 status: current
-version: 2.0
+version: 2.1
 owner: Bobby Gill
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-08
 ---
 
 # Source control
 
 The [SCM guidelines](README.md#scm--source-control) are the rules. This page is the model they describe, because a branching strategy is easier to show than to list.
 
-Almost all of this is enforced by branch protection rather than by anyone remembering it. Configure it once per repository and the guidelines hold themselves.
+Almost all of it is enforced by branch protection rather than by anyone remembering it. Configure that once per repository and most of these hold themselves.
 
-## Three branches, three environments
+## Four branches
 
-Every repository maintains three long-lived branches, one per environment ([SCM-002](README.md#scm--source-control)):
+```
+  feat/BL000-invite-flow ──► development ──► sandbox ──► staging ──► main
+                             (no env)          dev        staging     prod
+```
 
-| Branch | Environment | Resource identifier |
+| Branch | Deploys to | Identifier |
 | --- | --- | --- |
-| `main` | Production | `prod` |
+| `development` | nothing | — |
+| `sandbox` | Development | `dev` |
 | `staging` | Staging | `staging` |
-| `develop` | Development | `dev` |
+| `main` | Production | `prod` |
 
-The branch names and the resource identifiers deliberately differ. `main` is the universal convention for a default branch and `prod` is the universal convention in a resource name, and forcing either to match the other buys nothing.
+**`development` is the top of stream and the real source of truth** ([SCM-002](README.md#scm--source-control)). Every work branch is cut from it and every pull request merges back into it. It deploys nothing, and that is the point: a review session might merge ten pull requests, and on a large codebase ten deploys is an hour of transpiling for no benefit. Batch them and promote once.
 
-The environments themselves are separate AWS accounts or Azure resource groups ([OPS-008](README.md#ops--build-release-and-operations)). The branches say what code is where. The accounts keep the blast radius contained.
+Which makes `sandbox`, `staging`, and `main` doorways to their environments rather than places work happens.
 
-## Normal flow
+The branch names and the environment identifiers deliberately differ. `main` is the branch, `prod` is the string in a resource name, and `sandbox` is the branch whose environment is identified as `dev`. Forcing either side to match the other buys nothing and would break resource naming already in use.
 
-```
-  feat/BL000-invite-flow ──PR──► develop ──PR──► staging ──PR──► main
-                                    dev          staging         prod
-```
+**New repositories use `main`.** A repository already on `master` is not required to rename; the cost lands on every clone, every pipeline, and every protection rule, and it buys consistency rather than correctness. Rename when something else is already touching the pipeline.
 
-Cut a work branch from `develop`, named `<type>/BL###-<short-description>` ([SCM-004](README.md#scm--source-control)):
+## Downstream and upstream
+
+Water flows down the stream. New code starts at the top and flows **downstream** to `main` and into production. Anything moving the other way, a hotfix heading back toward the feature branches, is moving **upstream** ([SCM-005](README.md#scm--source-control)).
+
+Worth saying plainly, because the intuition runs backwards for some people: promoting toward production is *down*, not up.
+
+## Getting work in
+
+Cut from `development`, named `<type>/BL###-<short-description>`, lowercase ([SCM-004](README.md#scm--source-control)):
 
 ```
 feat/BL000-invite-flow
@@ -41,44 +50,38 @@ fix/BL000-token-refresh
 chore/BL000-bump-deps
 ```
 
-Everything reaches a long-lived branch by pull request ([SCM-003](README.md#scm--source-control)). No exceptions for one-line changes, for urgency, or for work an agent produced. Promotion between environments is itself a pull request, which is what makes "what is in staging" answerable by looking rather than asking.
+Everything reaches a long-lived branch by pull request ([SCM-003](README.md#scm--source-control)). No exceptions for one-line changes, for urgency, or for work an agent produced.
 
-Code moves **upward only** ([SCM-005](README.md#scm--source-control)). Merging `main` back into `develop` outside the hotfix path means something reached production that was never in development, and you now have two branches that disagree about history.
+**The pull request title becomes the commit message.** Squash on merge means the title is what survives in the log, so it needs to be descriptive and carry its JIRA link in bracket notation ([SCM-010](README.md#scm--source-control), [SCM-011](README.md#scm--source-control)). The individual commits inside the pull request do not matter and will disappear, which is exactly right: over a day a developer writes `temp` and `wip` and `coffee`, and none of that belongs in history.
+
+## Promoting
+
+Promotion is also a pull request, from one long-lived branch to the next ([SCM-003](README.md#scm--source-control)). Branch protection would refuse a direct push anyway.
+
+**Merge a promotion with a merge commit, not a squash.** Squashing would rewrite the commits into a single new one, so the two branches drift apart in both hashes and count. Merging preserves them, and after a promotion both branches hold the same commits.
+
+That distinction matters more than it looks. When `sandbox` and `development` contain identical hashes, verifying a promotion carried what it was supposed to takes seconds. When they contain rewritten equivalents, it means reading two diffs side by side.
 
 ## Hotfixes
 
-The one case that runs the other way ([SCM-006](README.md#scm--source-control)):
+The one flow that runs upstream ([SCM-006](README.md#scm--source-control)):
 
 ```
   main ──► hotfix/BL000-expired-token ──PR──► main
-                                               │
-                                     back-merge ▼
-                                        staging, develop
+                                                  │
+                                    pull upstream  ▼
+                                   staging, sandbox, development
 ```
 
-Branch from `main`, merge to `main` by pull request, then **immediately back-merge to `staging` and `develop`**.
+Branch from `main`, merge to `main` by pull request, then **immediately pull it back upstream** through `staging`, `sandbox`, and `development`.
 
-The back-merge is the part that gets skipped, and skipping it is how a fixed bug returns. The fix exists only on `main`, the next promotion from `staging` carries the old code forward, and production regresses to the bug you already fixed. If you take one thing from this page, take this.
+The upstream pull is itself a pull request, so it gets reviewed, and it merges **without squashing** ([SCM-011](README.md#scm--source-control)) so the original hash survives. That is the whole trick: the same hash existing upstream is something a reviewer verifies at a glance, where a squashed equivalent has to be read and compared.
 
-## Each branch deploys its environment
-
-CI/CD builds and deploys each environment from its own branch ([SCM-009](README.md#scm--source-control)):
-
-| Merge into | Deploys to |
-| --- | --- |
-| `develop` | Development |
-| `staging` | Staging |
-| `main` | Production |
-
-A merge into a long-lived branch is the deployment trigger. There is no separate deploy step to remember, and no way to ship something that did not go through a pull request.
-
-Continuous integration and deployment are mandatory, and they run on GitHub Actions unless a client requires their own pipeline ([OPS-019](README.md#ops--build-release-and-operations), [OPS-020](README.md#ops--build-release-and-operations)). Nothing is built or deployed by hand from an engineer's machine.
-
-Because each environment builds from its own branch, **keeping the branches in step is what keeps the environments comparable**. That is the real reason SCM-005 and SCM-006 matter: a `staging` branch that has drifted from `develop`, or a hotfix that never came back down, means you are testing something other than what you are about to ship.
+**The upstream pull is the step that gets skipped, and skipping it is how a fixed bug comes back.** The fix exists only on `main`, the next promotion carries the old code forward over the top of it, and production regresses to the bug you already paid to fix. If you take one thing from this page, take this.
 
 ## Branch protection
 
-Enable this on `main`, `staging`, and `develop` ([SCM-007](README.md#scm--source-control)):
+Enable on `development`, `sandbox`, `staging`, and `main` ([SCM-007](README.md#scm--source-control)):
 
 - Require a pull request before merging
 - Require at least one approving review
@@ -88,12 +91,32 @@ Enable this on `main`, `staging`, and `develop` ([SCM-007](README.md#scm--source
 - No branch deletion
 - No self-approval
 
-This list is doing most of the work in this domain. "Always use pull requests" is a wish until direct pushes are refused by the server, and once they are, nobody has to remember the rule.
+This list does most of the work in this domain. "Always use pull requests" is a wish until direct pushes are refused by the server, and once they are, nobody has to remember the rule.
 
-A pull request is approved by someone other than its author, and nobody merges their own ([SCM-008](README.md#scm--source-control)). That applies to agents too, and it is one of the actions an agent never takes on its own ([AGT-010](README.md#agt--working-with-agents)).
+A pull request is approved by someone other than its author, and nobody merges their own ([SCM-008](README.md#scm--source-control)). That applies to agents, and it is one of the actions an agent never takes alone ([AGT-010](README.md#agt--working-with-agents)).
 
-## What this does not cover
+## What belongs in the repository
 
-Commit message format is not standardized, and this is not the document to invent one in.
+Every repository has a `.gitignore`, seeded from [github/gitignore](https://github.com/github/gitignore), excluding `.env` files, service-account JSON, `.pgpass`, and anything else carrying a credential ([SCM-013](README.md#scm--source-control)). No file containing an API key, credential, or secret is ever committed ([SEC-009](README.md#sec--security)).
 
-Releases are tagged on `main` using SemVer ([OPS-012](README.md#ops--build-release-and-operations)).
+**Adding a path to `.gitignore` does not untrack a file already committed.** This catches people. Commit the removal first, then the `.gitignore` change, then restore the file locally:
+
+```bash
+git rm --cached path/to/file
+# add the path to .gitignore
+git add .gitignore && git commit -m "Stop tracking path/to/file [BL000-123]"
+```
+
+If that file held a secret, removing it from the tip does not remove it from history. Rotate the credential; it is still readable in every clone.
+
+**Agent instruction files are committed.** `AGENTS.md` and `CLAUDE.md` belong in the repository so the team gets the same agent behavior rather than whatever each person configured ([AGT-015](README.md#agt--working-with-agents), [AGT-016](README.md#agt--working-with-agents)). Anything machine-specific or personal goes in a gitignored `*.local.md` that the committed file imports, so local setup never lands in a client's repository.
+
+## Two things not to do
+
+**Do not rebase** ([SCM-012](README.md#scm--source-control)). Its genuine use cases are rare, and what is usually meant is a cross-branch pull. The word gets used loosely and then somebody rewrites shared history.
+
+**Do not share your credentials with another person** ([SEC-017](README.md#sec--security)), including a vendor developer brought in for two days. Give them their own access and let them raise their own pull requests, or have them hand code to someone who already has access. Work merged under a name is that person's work, and they are accountable for having reviewed it.
+
+## Client standards win
+
+Where a client has their own Git standards, theirs supersede these for that engagement ([SCM-014](README.md#scm--source-control)). Record it in the engagement constitution so the deviation is visible rather than assumed.

@@ -79,7 +79,9 @@ For building the labeled datasets that ML training runs against. Also useful for
 
 ### MLflow
 
-Experiment tracking, pipelines, and the model registry ([AI-009](../guidelines/README.md#ai--ai-and-agentic-systems)). Models are versioned here and evaluated before they are promoted or deployed.
+Experiment tracking, pipelines, and the model registry, on a BlueLabel self-hosted instance: **https://mlflow.toolbox.bluelabellabs.io/**
+
+Training runs are tracked here and models are versioned here, and a model is evaluated before it is promoted or deployed ([AI-009](../guidelines/README.md#ai--ai-and-agentic-systems)). Reproducibility depends on it: a pinned dataset version plus the recorded config and seeds is what makes a result something you can return to.
 
 ### HuggingFace
 

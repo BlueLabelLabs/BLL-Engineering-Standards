@@ -71,3 +71,5 @@ Ask the **Engineering Architect**, or Bobby. That is the route for anything you 
 The last one is worth internalizing. Most of what we do is recoverable. Client data leaving our control is not.
 
 Once you are set up, read [Using agents](../guidelines/using-agents.md). It applies to everyone, whichever side of the work you are on.
+
+Beyond the access above, [Engineering tools](tools.md) lists what else BlueLabel holds an account for. Worth a skim now and a revisit later, since the point of it is knowing a tool exists before you build the thing it would have saved you.

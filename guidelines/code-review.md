@@ -144,8 +144,12 @@ Most of this domain is enforced by branch protection, so it never reaches a revi
 
 | | |
 | --- | --- |
-| [SCM-004](README.md#scm--source-control) | Work branch cut from `develop` and named `<type>/BL###-<description>` |
-| [SCM-006](README.md#scm--source-control) | A hotfix merged to `main` is back-merged to `staging` and `develop`. Skipping this is how a fixed bug comes back |
+| [SCM-004](README.md#scm--source-control) | Work branch cut from `development`, named `<type>/BL###-<description>`, lowercase |
+| [SCM-006](README.md#scm--source-control) | A hotfix merged to `master` is pulled back upstream. Skipping this is how a fixed bug comes back |
+| [SCM-010](README.md#scm--source-control) | Pull request title is descriptive and carries its JIRA link |
+| [SCM-011](README.md#scm--source-control) | Squashed on merge, except promotions and upstream pulls, which preserve hashes |
+| [SCM-013](README.md#scm--source-control) | A `.gitignore` exists and excludes credential-bearing files |
+| [AGT-016](README.md#agt--working-with-agents) | `AGENTS.md`/`CLAUDE.md` committed; local config in a gitignored `*.local.md` |
 
 ### Tests
 

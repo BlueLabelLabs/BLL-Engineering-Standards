@@ -72,7 +72,7 @@ Evals are the test suite for the part of the system that fails quietly.
 **They do not run on every push** ([AI-012](README.md#ai--ai-and-agentic-systems)). This is a deliberate exception to [QUA-004](README.md#qua--quality), and the only one. A full eval suite costs real money in model calls and real minutes in wall clock, and running it on every commit to a feature branch buys nothing an engineer could not get by running it themselves. Instead:
 
 - **On demand**, so an engineer changing a prompt can measure the effect before opening a pull request. A `workflow_dispatch` GitHub Action is the usual mechanism.
-- **Automatically on merge to a long-lived branch**, `develop`, `staging`, and `main`, so nothing reaches an environment without having been measured.
+- **Automatically on merge to a long-lived branch**, so nothing reaches an environment without having been measured.
 
 That cadence puts the gate where it matters. Nothing reaches production without passing ([AI-003](README.md#ai--ai-and-agentic-systems)), and nobody waits twenty minutes to fix a typo.
 
